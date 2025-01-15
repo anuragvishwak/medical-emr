@@ -58,7 +58,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
-      <div className="bg-white p-5 rounded">
+      <div className="bg-white overflow-auto h-screen w-[350px] sm:w-auto sm:h-auto m-5 sm:m-0 p-5 rounded">
         <div className="flex mb-5 justify-between">
           <p className="font-bold text-2xl">Add Medical Record</p>
           <button
@@ -71,7 +71,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
           </button>
         </div>
 
-        <div className="flex">
+        <div className="md:flex">
           <div>
             <div>
               <p>Select Patient</p>
@@ -97,13 +97,13 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
                   {patientDetails
                     .filter((patient) => patient.name === selectPatient)
                     .map((patient) => (
-                      <div className="text-gray-500 flex items-center justify-between">
+                      <div className="text-gray-500 sm:flex items-center justify-between">
                         <p>{patient.name}</p>
-                        <span className="mx-2">|</span>
+                        <span className="mx-2 hidden sm:block">|</span>
                         <p className="">{patient.email}</p>
-                        <span className="mx-2">|</span>
+                        <span className="mx-2 hidden sm:block">|</span>
                         <p>{patient.gender}</p>
-                        <span className="mx-2">|</span>
+                        <span className="mx-2 hidden sm:block">|</span>
                         <p>{patient.phoneNo}</p>
                       </div>
                     ))}
@@ -142,7 +142,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
               ""
             )}
           </div>
-          <div className="ml-7">
+          <div className="sm:ml-7">
             <p className="text-lg mb-2 font-semibold">Medical History</p>
             <div>
               <Formik
@@ -242,7 +242,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
                           setclinicalNotes(e.target.value);
                         }}
                         placeholder="add a clinical note...."
-                        className="border w-80 border-gray-300 rounded p-1.5 h-28"
+                        className="border w-full sm:w-80 border-gray-300 rounded p-1.5 h-28"
                       />
                     </div>
 

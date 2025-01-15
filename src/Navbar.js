@@ -134,12 +134,20 @@ function Navbar() {
             </button>
           </Link>
 
-          <button>
+         <Link className="" to={'/Billing&Payment'}>
+         <button 
+         className={` px-2 py-1 rounded ${
+          fetchingCurrentLocation.pathname === "/Billing&Payment"
+            ? "border bg-gray-200"
+            : ""
+        }`}
+         >
             <div className="flex items-center">
               <RiMoneyRupeeCircleLine className=" text-xl mr-1" />
               Billing & Payment
             </div>
           </button>
+          </Link>
         </div>
       </div>
     </div>
