@@ -27,7 +27,7 @@ function Appointment() {
 
   return (
     <div className="bg-gray-50 sm:flex min-h-screen h-full">
-      <div className="flex p-4 sm:p-0 items-center">
+      <div className="flex p-4 sm:p-0">
         <Navbar />
         <p className="text-3xl ml-2 sm:hidden text-[#333333] font-semibold">Appointments</p>
       </div>

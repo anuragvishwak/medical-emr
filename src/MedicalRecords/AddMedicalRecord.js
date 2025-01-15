@@ -1,9 +1,11 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { database } from "../FirebaseConfig";
+import { FaRupeeSign } from "react-icons/fa";
 
 function AddMedicalRecord({ setopeningMedicalRecord }) {
   const [patientDetails, setPatientDetails] = useState([]);
+  const [appointmentDetails, setappointmentDetails] = useState([]);
   const [selectPatient, setselectPatient] = useState("");
 
   async function gatheringPatientDetails() {
@@ -18,8 +20,21 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
     setPatientDetails(multipleArray);
   }
 
+  async function gatheringAppointmentDetails() {
+    const appointmentDetails = await getDocs(
+      collection(database, "appointment_details")
+    );
+    let multipleArray = appointmentDetails.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setappointmentDetails(multipleArray);
+    console.log(multipleArray);
+  }
+
   useEffect(() => {
     gatheringPatientDetails();
+    gatheringAppointmentDetails();
   }, []);
 
   return (
@@ -57,38 +72,48 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
 
           {selectPatient ? (
             <div className="my-3">
-              <p className="text-lg font-semibold">Patient Details</p>
-              {patientDetails
-                .filter((patient) => patient.name === selectPatient)
-                .map((patient) => (
-                  <div className="text-gray-500 flex items-center justify-between">
-                    <p>{patient.name}</p>
-                    <span className="mx-2">|</span>
-                    <p className="">{patient.email}</p>
-                    <span className="mx-2">|</span>
-                    <p>{patient.gender}</p>
-                    <span className="mx-2">|</span>
-                    <p>{patient.phoneNo}</p>
-                  </div>
-                ))}
+              <div className="">
+                <p className="text-lg font-semibold">Patient Details</p>
+                {patientDetails
+                  .filter((patient) => patient.name === selectPatient)
+                  .map((patient) => (
+                    <div className="text-gray-500 flex items-center justify-between">
+                      <p>{patient.name}</p>
+                      <span className="mx-2">|</span>
+                      <p className="">{patient.email}</p>
+                      <span className="mx-2">|</span>
+                      <p>{patient.gender}</p>
+                      <span className="mx-2">|</span>
+                      <p>{patient.phoneNo}</p>
+                    </div>
+                  ))}
+              </div>
+
+              <div className="">
+                <p className="text-lg font-semibold">Appointment Details</p>
+                {appointmentDetails
+                  .filter(
+                    (appointment) => appointment.patient === selectPatient
+                  )
+                  .map((appointment) => (
+                    <div className="text-gray-500 flex items-center justify-between">
+                      <p>Type: {appointment.appointmentType}</p>
+                      <span className="mx-2">|</span>
+                      <div className="flex  items-center">
+                        <p className="mr-1">Fees:</p>
+                        <FaRupeeSign className="" />
+                        <p className="">{appointment.fees}/-</p>
+                      </div>
+                      <span className="mx-2">|</span>
+                      <p>{appointment.gender}</p>
+                      <span className="mx-2">|</span>
+                    </div>
+                  ))}
+              </div>
             </div>
           ) : (
             ""
           )}
-
-          <div className="grid grid-col-2 gap-5">
-            <div>
-              <p>Blood Group</p>
-              <input className="border"></input>
-            </div>
-
-            <div>
-              <p>Weight</p>
-              <input className="border"></input>
-            </div>
-          </div>
-
-          
         </div>
       </div>
     </div>
