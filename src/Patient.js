@@ -5,15 +5,12 @@ import { database } from "./FirebaseConfig";
 import { LuUser } from "react-icons/lu";
 import { CiMail, CiPhone } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa";
-import { Calendar } from "lucide";
 import { BiCalendar } from "react-icons/bi";
 import Navbar from "./Navbar";
 
 function Patient() {
   const [openingPatientForm, setOpeningPatientForm] = useState(false);
   const [patientDetails, setPatientDetails] = useState([]);
-
-  const dateFormat = new Date();
 
   async function gatheringPatientDetails() {
     const patientDetails = await getDocs(
@@ -33,22 +30,24 @@ function Patient() {
   }, []);
 
   return (
-    <div className="bg-gray-50 flex min-h-screen h-full">
-      <div>
+    <div className="bg-gray-50 w-full sm:flex min-h-screen h-full">
+      <div className="flex p-4 items-center sm:hidden">
         <Navbar />
+        <p className=" ml-2 text-3xl font-semibold">Patient Details</p>
       </div>
-      <div className="w-full p-5">
-        <div className="flex items-end mb-5 justify-between">
+
+      <div className="w-full px-5 sm:px-0 sm:p-5">
+        <div className="flex items-end mb-3 sm:mb-5 justify-between">
           <div>
-            <p className="text-3xl font-semibold">Patient Details</p>
-            <p className="text-gray-400">
+            <p className="text-xl sm:text-3xl font-semibold">Patient Details</p>
+            <p className="text-gray-400 hidden sm:block">
               Here, you can manage patients and view their details seamlessly.
             </p>
           </div>
           <div>
             <button
               onClick={() => setOpeningPatientForm(true)}
-              className="bg-[#333333] text-white font-bold py-2 px-4 rounded"
+              className="bg-[#333333] mt-2 sm:mt-0 text-white font-bold text-sm sm:text-base py-2 px-2 sm:px-4 rounded"
             >
               <div className="flex items-center">
                 <FaPlus className="mr-1" />
@@ -69,7 +68,7 @@ function Patient() {
                 <p className="text-gray-400">{patient.email}</p>
               </div>
               <hr className="my-3" />
-              <div className="flex items-center w-9/12 justify-between">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
                 <div className="flex items-center">
                   <LuUser size={30} className="bg-gray-200 p-1 rounded" />
                   <div className="ml-2">
@@ -107,9 +106,9 @@ function Patient() {
                   <div className="ml-2">
                     <p className="font-semibold text-sm">Date of Birth</p>
                     <p className="text-gray-400">
-                      {new Date(patient.dob.seconds * 1000).toLocaleDateString(
-                        "en-GB"
-                      )}
+                      {new Date(
+                        patient?.dob?.seconds * 1000
+                      ).toLocaleDateString("en-GB")}
                     </p>
                   </div>
                 </div>
@@ -120,7 +119,10 @@ function Patient() {
       </div>
 
       {openingPatientForm && (
-        <AddPatientForm setOpeningPatientForm={setOpeningPatientForm} />
+        <AddPatientForm
+          gatheringPatientDetails={gatheringPatientDetails}
+          setOpeningPatientForm={setOpeningPatientForm}
+        />
       )}
     </div>
   );

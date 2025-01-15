@@ -4,7 +4,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { database } from "../FirebaseConfig";
 import { toast } from "react-toastify";
 
-function AddPatientForm({ setOpeningPatientForm }) {
+function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [name, setName] = useState("");
@@ -33,6 +33,7 @@ function AddPatientForm({ setOpeningPatientForm }) {
       console.log("Document written with ID: ", docRef.id);
       toast.success("Patient added successfully!");
       setOpeningPatientForm(false);
+      gatheringPatientDetails();
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -40,7 +41,7 @@ function AddPatientForm({ setOpeningPatientForm }) {
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
-      <div className="bg-white p-5">
+      <div className="bg-white w-80 sm:w-auto p-5">
         <div className="flex items-center mb-4 justify-between">
           <p className="font-bold text-3xl">Add Patient</p>
           <button
@@ -51,7 +52,7 @@ function AddPatientForm({ setOpeningPatientForm }) {
           </button>
         </div>
         <p className="font-semibold text-xl mb-1">Basic Information</p>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
             <label className="font-semibold">Name</label>
             <input
@@ -79,7 +80,7 @@ function AddPatientForm({ setOpeningPatientForm }) {
               <option value="female">Female</option>
             </select>
           </div>
-          <div>
+          <div className="flex flex-col">
             <label className="font-semibold">Date of Birth</label>
             <DatePicker
               selected={selectedDate}
@@ -87,14 +88,14 @@ function AddPatientForm({ setOpeningPatientForm }) {
               dateFormat="yyyy-MM-dd"
               placeholderText="Select a date"
               isClearable
-              className="border rounded p-1.5 border-gray-300"
+              className="border rounded w-full p-1.5 border-gray-300"
             />
           </div>
         </div>
 
         <div className="mt-8">
           <p className="font-semibold text-xl mb-1">Contact Information</p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label className="font-semibold">Phone</label>
               <input
