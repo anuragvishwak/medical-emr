@@ -26,15 +26,16 @@ function Appointment() {
   }, []);
 
   return (
-    <div className="bg-gray-50 flex min-h-screen h-full">
-      <div>
+    <div className="bg-gray-50 sm:flex min-h-screen h-full">
+      <div className="flex p-4 sm:p-0 items-center">
         <Navbar />
+        <p className="text-3xl ml-2 sm:hidden text-[#333333] font-semibold">Appointments</p>
       </div>
-      <div className="w-full p-5">
+      <div className="w-full px-5 sm:p-5">
         <div className="flex items-end mb-5 justify-between">
           <div>
-            <p className="text-3xl text-[#333333] font-semibold">Appointments</p>
-            <p className="text-gray-400">
+            <p className="text-3xl hidden sm:block text-[#333333] font-semibold">Appointments</p>
+            <p className="text-gray-400 hidden sm:block">
               Here, you can manage Appointments and manage seamlessly.
             </p>
           </div>
@@ -42,7 +43,7 @@ function Appointment() {
             onClick={() => {
               setopeningAppointmentForm(true);
             }}
-            className="bg-[#333333] text-white font-bold py-2 px-4 rounded"
+            className="bg-[#333333] text-white font-bold text-sm p-2 sm:px-4 rounded"
           >
             <div className="flex items-center">
               <FaPlus className="mr-1" />
@@ -73,7 +74,7 @@ function Appointment() {
                 {appointment.patient}
               </p>
 
-              <div className="flex items-center justify-between">
+              <div className="sm:flex items-center justify-between">
                 <div className="flex items-center">
                   <p className="text-[#333333] mr-2 font-semibold">Fees:</p>
                   <FaRupeeSign className="text-gray-400" />

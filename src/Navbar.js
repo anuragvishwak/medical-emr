@@ -18,7 +18,7 @@ function Navbar() {
      
      <button
         onClick={() => setopeningNavbar(!openingNavbar)}
-        className="border-2 border-[#292E1E] rounded p-1"
+        className="border-2 border-[#292E1E] sm:hidden rounded p-1"
       >
         <FaBars size={20} />
       </button>
@@ -83,6 +83,7 @@ function Navbar() {
           </div>
         </div>
       )}
+
 
       <div className="hidden sm:block border bg-white w-52 font-semibold text-[#333333] min-h-screen h-full">
         <div className="px-4 my-10">

@@ -63,15 +63,15 @@ function AddAppointments({ setopeningAppointmentForm }) {
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-5">
-          <div className="">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="w-full">
             <p>Appointment Date</p>
             <DatePicker
               selected={startDate}
               onChange={(date) => setstartDate(date)}
               dateFormat="yyyy/MM/dd"
               placeholderText="Select a date"
-              className=" border border-gray-400 w-full rounded px-4 py-1"
+              className=" border border-gray-400 w-72 sm:w-auto rounded px-4 py-1"
             />
           </div>
 
@@ -93,7 +93,7 @@ function AddAppointments({ setopeningAppointmentForm }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 my-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 my-3 gap-5">
           <div>
             <p>Select Patient</p>
             <select
