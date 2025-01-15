@@ -31,7 +31,7 @@ function Patient() {
 
   return (
     <div className="bg-gray-50 w-full sm:flex min-h-screen h-full">
-      <div className="flex p-4 sm:p-0 items-center ">
+      <div className="flex p-4 sm:p-0">
         <Navbar />
         <p className=" ml-2 text-3xl sm:hidden font-semibold">Patient Details</p>
       </div>
