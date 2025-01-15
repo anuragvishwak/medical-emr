@@ -1,12 +1,31 @@
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { database } from "../FirebaseConfig";
-import { FaRupeeSign } from "react-icons/fa";
+import { FaDumpster, FaPlus, FaRupeeSign } from "react-icons/fa";
+import { Formik, Form, Field, FieldArray } from "formik";
+import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 
 function AddMedicalRecord({ setopeningMedicalRecord }) {
   const [patientDetails, setPatientDetails] = useState([]);
   const [appointmentDetails, setappointmentDetails] = useState([]);
   const [selectPatient, setselectPatient] = useState("");
+  const [clinicalNotes, setclinicalNotes] = useState("");
+
+  async function submittingMedicalRecord(values) {
+    try {
+      await addDoc(collection(database, "medical_records"), {
+        patient: selectPatient,
+        clinical_note: clinicalNotes,
+        allergies: values.allergies,
+        immunization_records: values.immunization_records,
+      });
+      toast.success("Medical Record created successfully!!!!");
+    } catch (e) {
+      console.log("Error", e);
+      toast.error("Something went wrong!!!");
+    }
+  }
 
   async function gatheringPatientDetails() {
     const patientDetails = await getDocs(
@@ -40,7 +59,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
       <div className="bg-white p-5 rounded">
-        <div className="flex justify-between">
+        <div className="flex mb-5 justify-between">
           <p className="font-bold text-2xl">Add Medical Record</p>
           <button
             onClick={() => {
@@ -52,68 +71,192 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
           </button>
         </div>
 
-        <div>
+        <div className="flex">
           <div>
-            <p>Select Patient</p>
-            <select
-              className="border w-full  p-1.5 rounded border-gray-400"
-              onChange={(e) => {
-                const patient = e.target.value;
-                setselectPatient(patient);
-              }}
-            >
-              {patientDetails.map((patient) => (
-                <option key={patient.id} value={patient.name}>
-                  {patient.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {selectPatient ? (
-            <div className="my-3">
-              <div className="">
-                <p className="text-lg font-semibold">Patient Details</p>
-                {patientDetails
-                  .filter((patient) => patient.name === selectPatient)
-                  .map((patient) => (
-                    <div className="text-gray-500 flex items-center justify-between">
-                      <p>{patient.name}</p>
-                      <span className="mx-2">|</span>
-                      <p className="">{patient.email}</p>
-                      <span className="mx-2">|</span>
-                      <p>{patient.gender}</p>
-                      <span className="mx-2">|</span>
-                      <p>{patient.phoneNo}</p>
-                    </div>
-                  ))}
-              </div>
-
-              <div className="">
-                <p className="text-lg font-semibold">Appointment Details</p>
-                {appointmentDetails
-                  .filter(
-                    (appointment) => appointment.patient === selectPatient
-                  )
-                  .map((appointment) => (
-                    <div className="text-gray-500 flex items-center justify-between">
-                      <p>Type: {appointment.appointmentType}</p>
-                      <span className="mx-2">|</span>
-                      <div className="flex  items-center">
-                        <p className="mr-1">Fees:</p>
-                        <FaRupeeSign className="" />
-                        <p className="">{appointment.fees}/-</p>
-                      </div>
-                      <span className="mx-2">|</span>
-                      <p>{appointment.gender}</p>
-                      <span className="mx-2">|</span>
-                    </div>
-                  ))}
-              </div>
+            <div>
+              <p>Select Patient</p>
+              <select
+                className="border w-full  p-1.5 rounded border-gray-400"
+                onChange={(e) => {
+                  const patient = e.target.value;
+                  setselectPatient(patient);
+                }}
+              >
+                {patientDetails.map((patient) => (
+                  <option key={patient.id} value={patient.name}>
+                    {patient.name}
+                  </option>
+                ))}
+              </select>
             </div>
-          ) : (
-            ""
-          )}
+
+            {selectPatient ? (
+              <div className="my-5">
+                <div className="">
+                  <p className="text-lg font-semibold">Patient Details</p>
+                  {patientDetails
+                    .filter((patient) => patient.name === selectPatient)
+                    .map((patient) => (
+                      <div className="text-gray-500 flex items-center justify-between">
+                        <p>{patient.name}</p>
+                        <span className="mx-2">|</span>
+                        <p className="">{patient.email}</p>
+                        <span className="mx-2">|</span>
+                        <p>{patient.gender}</p>
+                        <span className="mx-2">|</span>
+                        <p>{patient.phoneNo}</p>
+                      </div>
+                    ))}
+                </div>
+
+                <div className="mt-2">
+                  <p className="text-lg mb-2 font-semibold">
+                    Appointment Details
+                  </p>
+                  <div className="h-60 overflow-auto">
+                    {appointmentDetails
+                      .filter(
+                        (appointment) => appointment.patient === selectPatient
+                      )
+                      .map((appointment, index) => (
+                        <div className="text-gray-500 border  p-2 rounded mb-4">
+                          <p className="font-semibold text-[#333333]">
+                            Appointment {index + 1}
+                          </p>
+                          <div className="flex justify-between">
+                            <p>Type: {appointment.appointmentType}</p>
+                            <div className="flex items-center">
+                              <p className="mr-1">Fees:</p>
+                              <FaRupeeSign className="" />
+                              <p className="">{appointment.fees}/-</p>
+                            </div>
+                          </div>
+                          <hr className="my-2" />
+                          <p>Note: {appointment.additionalNote}</p>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="ml-7">
+            <p className="text-lg mb-2 font-semibold">Medical History</p>
+            <div>
+              <Formik
+                initialValues={{
+                  allergies: [""],
+                  immunization_records: [""],
+                }}
+                onSubmit={(values) => {
+                  console.log("Form values:", values);
+                  submittingMedicalRecord(values);
+                }}
+              >
+                {({ values }) => (
+                  <Form>
+                    <div className="">
+                      <FieldArray name="allergies">
+                        {({ push, remove }) => (
+                          <div>
+                            {values.allergies.map((_, index) => (
+                              <div key={index} className="mb-4">
+                                <div className="flex items-center">
+                                  <label htmlFor={`allergies.${index}`}>
+                                    Allergy
+                                  </label>
+                                  <button
+                                    type="button"
+                                    onClick={() => push("")}
+                                    className="bg-[#333333] text-white p-1 text-sm rounded-full mt-1 ml-1"
+                                  >
+                                    <FaPlus />
+                                  </button>
+                                </div>
+                                <div className="flex items-center">
+                                  <Field
+                                    name={`allergies.${index}`}
+                                    placeholder="Enter allergy"
+                                    className="border p-2 rounded w-full"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => remove(index)}
+                                    className="text-red-500 ml-1 text-xl"
+                                  >
+                                    <MdDelete />
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </FieldArray>
+
+                      <FieldArray name="immunization_records">
+                        {({ push, remove }) => (
+                          <div>
+                            {values.immunization_records.map((_, index) => (
+                              <div key={index} className="mb-4">
+                                <div className="flex items-center">
+                                  <label
+                                    htmlFor={`immunization_records.${index}`}
+                                  >
+                                    Immunization Records (Vaccines)
+                                  </label>
+                                  <button
+                                    type="button"
+                                    onClick={() => push("")}
+                                    className="bg-[#333333] text-white p-1 text-sm rounded-full mt-1 ml-1"
+                                  >
+                                    <FaPlus />
+                                  </button>
+                                </div>
+                                <div className="flex items-center">
+                                  <Field
+                                    name={`immunization_records.${index}`}
+                                    placeholder="Enter immunization record"
+                                    className="border p-2 rounded w-full"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => remove(index)}
+                                    className="text-red-500 ml-1 text-xl"
+                                  >
+                                    <MdDelete />
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </FieldArray>
+                    </div>
+
+                    <div>
+                      <p>Clinical Note:</p>
+                      <textarea
+                        onChange={(e) => {
+                          setclinicalNotes(e.target.value);
+                        }}
+                        placeholder="add a clinical note...."
+                        className="border w-80 border-gray-300 rounded p-1.5 h-28"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="bg-[#333333] w-full text-white p-2 rounded mt-4"
+                    >
+                      Submit
+                    </button>
+                  </Form>
+                )}
+              </Formik>
+            </div>
+          </div>
         </div>
       </div>
     </div>
