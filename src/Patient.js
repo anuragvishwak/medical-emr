@@ -31,15 +31,15 @@ function Patient() {
 
   return (
     <div className="bg-gray-50 w-full sm:flex min-h-screen h-full">
-      <div className="flex p-4 items-center sm:hidden">
+      <div className="flex p-4 sm:p-0 items-center ">
         <Navbar />
-        <p className=" ml-2 text-3xl font-semibold">Patient Details</p>
+        <p className=" ml-2 text-3xl sm:hidden font-semibold">Patient Details</p>
       </div>
 
-      <div className="w-full px-5 sm:px-0 sm:p-5">
+      <div className="w-full px-5 sm:p-5">
         <div className="flex items-end mb-3 sm:mb-5 justify-between">
           <div>
-            <p className="text-xl sm:text-3xl font-semibold">Patient Details</p>
+            <p className="text-xl hidden sm:block sm:text-3xl font-semibold">Patient Details</p>
             <p className="text-gray-400 hidden sm:block">
               Here, you can manage patients and view their details seamlessly.
             </p>

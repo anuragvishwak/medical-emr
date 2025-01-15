@@ -41,7 +41,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
-      <div className="bg-white w-80 sm:w-auto p-5">
+      <div className="bg-white w-80 overflow-auto my-5 sm:w-auto p-5">
         <div className="flex items-center mb-4 justify-between">
           <p className="font-bold text-3xl">Add Patient</p>
           <button
@@ -124,14 +124,18 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
             ></textarea>
           </div>
         </div>
+
+       <div className="flex items-center mt-5">
+      
         <button
           onClick={() => {
             handleSubmit();
           }}
-          className="w-full bg-[#333333] text-white mt-5 p-2 rounded"
+          className="w-full bg-[#333333] text-white  p-2 rounded"
         >
           Add Patient
         </button>
+       </div>
       </div>
     </div>
   );
