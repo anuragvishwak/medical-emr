@@ -69,6 +69,7 @@ function AddChargesForm({ setopeningCharges }) {
           </div>
         </div>
 
+       
         <Formik
           initialValues={{
             syntoms: [""],
