@@ -26,12 +26,12 @@ function Appointment() {
   }, []);
 
   return (
-    <div className="bg-gray-50 sm:flex min-h-screen h-full">
+    <div className="bg-gray-50  sm:flex min-h-screen h-full">
       <div className="flex p-4 sm:p-0">
         <Navbar />
         <p className="text-3xl ml-2 sm:hidden text-[#333333] font-semibold">Appointments</p>
       </div>
-      <div className="w-full px-5 sm:p-5">
+      <div className="w-full overflow-auto h-screen px-5 sm:p-5">
         <div className="flex items-end mb-5 justify-between">
           <div>
             <p className="text-3xl hidden sm:block text-[#333333] font-semibold">Appointments</p>

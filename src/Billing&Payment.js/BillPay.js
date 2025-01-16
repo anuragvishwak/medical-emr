@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import { FaPlus } from "react-icons/fa";
 import AddPaymentForm from "./AddPaymentForm";
+import AddChargesForm from "./AddChargesForm";
 
 function BillPay() {
   const [openingBilling, setopeningBilling] = useState(false);
-  const [currentTab, setcurrentTab] = useState('charges');
+  const [openingCharges, setopeningCharges] = useState(false);
+
+  const [currentTab, setcurrentTab] = useState("charges");
 
   return (
     <div className="flex min-h-screen h-full bg-gray-50">
@@ -25,26 +28,71 @@ function BillPay() {
               Here you can manage Bills & Payments of the patients.
             </p>
           </div>
-          <button
-            onClick={() => {
-              setopeningBilling(true);
-            }}
-            className="bg-[#333333] text-white font-semibold text-sm p-2 sm:px-4 rounded"
-          >
-            <div className="flex items-center">
-              <FaPlus className="mr-1" />
-              <p> Add Payment</p>
-            </div>
-          </button>
         </div>
 
-        <div className="w-36 text-lg font-semibold  flex items-center justify-between">
-            <button className={`${currentTab === 'charges'? 'text-[#333333] border-b border-[#333333]' : 'text-gray-400'}`} onClick={()=>{setcurrentTab('charges')}}>Charges</button>
-            <button className={`${currentTab === 'billing'? 'text-[#333333] border-b border-[#333333]' : 'text-gray-400'}`} onClick={()=>{setcurrentTab('billing')}}>Billing</button>
+        <div className="flex items-center justify-between">
+          <div className="w-36 text-lg font-semibold  flex items-center justify-between">
+            <button
+              className={`${
+                currentTab === "charges"
+                  ? "text-[#333333] border-b border-[#333333]"
+                  : "text-gray-400"
+              }`}
+              onClick={() => {
+                setcurrentTab("charges");
+              }}
+            >
+              Charges
+            </button>
+            <button
+              className={`${
+                currentTab === "billing"
+                  ? "text-[#333333] border-b border-[#333333]"
+                  : "text-gray-400"
+              }`}
+              onClick={() => {
+                setcurrentTab("billing");
+              }}
+            >
+              Billing
+            </button>
+          </div>
+          {currentTab === "charges" ? (
+            <button
+              onClick={() => {
+                setopeningCharges(true);
+              }}
+              className="bg-[#333333] text-white font-semibold text-sm p-1.5 sm:px-4 rounded"
+            >
+              <div className="flex items-center">
+                <FaPlus className="mr-1" />
+                <p>Add Charges</p>
+              </div>
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                setopeningBilling(true);
+              }}
+              className="bg-[#333333] text-white font-semibold text-sm p-1.5 sm:px-4 rounded"
+            >
+              <div className="flex items-center">
+                <FaPlus className="mr-1" />
+                <p>Add Billing</p>
+              </div>
+            </button>
+          )}
         </div>
-        <hr className=""/>
+
+        <hr className="" />
       </div>
-      {openingBilling && <AddPaymentForm setopeningBilling = {setopeningBilling}/>}
+      {openingBilling && (
+        <AddPaymentForm setopeningBilling={setopeningBilling} />
+      )}
+
+      {openingCharges && (
+        <AddChargesForm setopeningCharges={setopeningCharges} />
+      )}
     </div>
   );
 }

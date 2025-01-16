@@ -36,7 +36,7 @@ function Patient() {
         <p className=" ml-2 text-3xl sm:hidden font-semibold">Patient Details</p>
       </div>
 
-      <div className="w-full px-5 sm:p-5">
+      <div className="w-full px-5 overflow-auto h-screen sm:p-5">
         <div className="flex items-end mb-3 sm:mb-5 justify-between">
           <div>
             <p className="text-xl hidden sm:block sm:text-3xl font-semibold">Patient Details</p>
