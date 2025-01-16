@@ -15,14 +15,12 @@ function Navbar() {
 
   return (
     <div>
-     
-     <button
+      <button
         onClick={() => setopeningNavbar(!openingNavbar)}
         className="border-2 border-[#292E1E] sm:hidden rounded p-1"
       >
         <FaBars size={20} />
       </button>
-
 
       {openingNavbar && (
         <div className="absolute top-14 shadow-xl z-50 border bg-white font-semibold text-[#333333]">
@@ -74,16 +72,23 @@ function Navbar() {
               </button>
             </Link>
 
-            <button>
+            <Link className="" to={"/Billing&Payment"}>
+            <button
+              className={` px-2 py-1 rounded ${
+                fetchingCurrentLocation.pathname === "/Billing&Payment"
+                  ? "border bg-gray-200"
+                  : ""
+              }`}
+            >
               <div className="flex items-center">
                 <RiMoneyRupeeCircleLine className=" text-xl mr-1" />
                 Billing & Payment
               </div>
             </button>
+          </Link>
           </div>
         </div>
       )}
-
 
       <div className="hidden sm:block border bg-white w-52 font-semibold text-[#333333] min-h-screen h-full">
         <div className="px-4 my-10">
@@ -134,19 +139,19 @@ function Navbar() {
             </button>
           </Link>
 
-         <Link className="" to={'/Billing&Payment'}>
-         <button 
-         className={` px-2 py-1 rounded ${
-          fetchingCurrentLocation.pathname === "/Billing&Payment"
-            ? "border bg-gray-200"
-            : ""
-        }`}
-         >
-            <div className="flex items-center">
-              <RiMoneyRupeeCircleLine className=" text-xl mr-1" />
-              Billing & Payment
-            </div>
-          </button>
+          <Link className="" to={"/Billing&Payment"}>
+            <button
+              className={` px-2 py-1 rounded ${
+                fetchingCurrentLocation.pathname === "/Billing&Payment"
+                  ? "border bg-gray-200"
+                  : ""
+              }`}
+            >
+              <div className="flex items-center">
+                <RiMoneyRupeeCircleLine className=" text-xl mr-1" />
+                Billing & Payment
+              </div>
+            </button>
           </Link>
         </div>
       </div>
