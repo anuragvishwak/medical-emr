@@ -121,7 +121,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
                       .map((appointment, index) => (
                         <div className="text-gray-500 border  p-2 rounded mb-4">
                           <p className="font-semibold text-[#333333]">
-                            Appointment {index + 1}
+                           Appointment {index + 1}
                           </p>
                           <div className="flex justify-between">
                             <p>Type: {appointment.appointmentType}</p>

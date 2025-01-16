@@ -46,7 +46,7 @@ function MedicalRecords() {
         <Navbar />
         <p className="text-3xl ml-2 sm:hidden text-[#333333] font-semibold">Medical Records</p>
       </div>
-      <div className="px-5 sm:p-5 w-full">
+      <div className="px-5 sm:p-5 overflow-auto h-screen w-full">
         <div className="flex items-center mb-5 justify-between">
           <div className="">
             <p className="text-3xl hidden sm:block font-semibold">Medical Record</p>
@@ -68,7 +68,7 @@ function MedicalRecords() {
         </div>
 
         {gatheringMedicalRecord.map((medical) => (
-          <div className="bg-white p-5 rounded shadow">
+          <div className="bg-white mb-3 p-5 rounded shadow">
             <p className="text-3xl font-bold text-[#333333]">
               {medical.patient}
             </p>
