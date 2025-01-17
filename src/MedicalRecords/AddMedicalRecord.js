@@ -62,7 +62,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
-      <div className="bg-white overflow-auto h-[550px] w-auto sm:w-8/12  m-5 sm:m-0 p-5 rounded">
+      <div className="bg-white overflow-auto h-[800px] sm:h-[550px] w-[380px] sm:w-8/12  m-5 sm:m-0 p-5 rounded">
         <div className="flex mb-3 justify-between">
           <div className="flex items-center">
             <button
