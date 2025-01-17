@@ -6,6 +6,7 @@ import { Formik, Form, Field, FieldArray } from "formik";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import Treatment from "./Treatment";
+import VaccineMedicine from "./VaccineMedicine";
 
 function AddMedicalRecord({ setopeningMedicalRecord }) {
   const [patientDetails, setPatientDetails] = useState([]);
@@ -61,7 +62,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
-      <div className="bg-white overflow-auto h-[550px] w-[350px] sm:w-8/12  m-5 sm:m-0 p-5 rounded">
+      <div className="bg-white overflow-auto h-[550px] w-auto sm:w-8/12  m-5 sm:m-0 p-5 rounded">
         <div className="flex mb-3 justify-between">
           <div className="flex items-center">
             <button
@@ -75,7 +76,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
                 className="border sm:hidden border-[#333333] p-1 rounded"
               />
             </button>
-            <p className="ml-2 font-bold text-2xl">Add Medical Record</p>
+            <p className="ml-2 font-bold text-xl sm:text-2xl">Add Medical Record</p>
           </div>
           <button
             onClick={() => {
@@ -172,7 +173,7 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
             Create Medical Record
           </button>
         </div>
-        <hr  className="hidden sm:block"/>
+        <hr className="hidden sm:block" />
 
         {recordTabs === "medical_record" ? (
           <div className="md:flex justify-between w-full mt-4">
@@ -364,8 +365,10 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
               </div>
             </div>
           </div>
-        ) : (
+        ) : recordTabs === "treatment" ? (
           <Treatment />
+        ) : (
+          <VaccineMedicine />
         )}
       </div>
     </div>
