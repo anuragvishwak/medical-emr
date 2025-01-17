@@ -55,7 +55,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
             <label className="font-semibold">Name</label>
-            <input
+          <input
               onChange={(e) => setName(e.target.value)}
               placeholder="John Doe"
               className="border border-gray-300 rounded p-1.5"
