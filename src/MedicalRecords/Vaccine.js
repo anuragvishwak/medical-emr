@@ -1,15 +1,43 @@
+import { addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
+import { database } from "../FirebaseConfig";
+import { toast } from "react-toastify";
+import RenderingVaccine from "./RenderingVaccine";
 
-function Vaccine({ openingVaccineForm }) {
+function Vaccine({ openingVaccineForm, setopeningVaccineForm }) {
   const [vaccineType, setvaccineType] = useState("");
   const [vaccineName, setvaccineName] = useState("");
+  const [stock, setstock] = useState("");
+  const [precaution, setprecaution] = useState("");
+  const [cost, setcost] = useState();
+  const [storageRequirements, setstoreageRequirements] = useState("");
+  const [dosage, setdosage] = useState("");
+
+
+  async function submittingVccines() {
+    try {
+      await addDoc(collection(database, "vaccine"), {
+        vaccineType: vaccineType,
+        vaccineName: vaccineName,
+        stock: stock,
+        precaution: precaution,
+        storageRequirements: storageRequirements,
+        dosage: dosage,
+        cost: cost
+      });
+      toast.success("Treatment added successfully!!");
+      setopeningVaccineForm(false);
+    } catch {
+      toast.error("Something went wrong!!!");
+    }
+  }
 
   return (
     <div>
       {openingVaccineForm && (
         <div className="border p-3 rounded-xl border-gray-400">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full gap-5">
-            <div>
+            <div>rn
               <p className="mb-1">Name</p>
               <input
                 onChange={(e) => {
@@ -36,39 +64,71 @@ function Vaccine({ openingVaccineForm }) {
 
             <div>
               <p className="mb-1">Dosage</p>
-              <input className="border w-full border-gray-300 rounded p-1.5"></input>
+              <input
+                onChange={(e) => {
+                  setdosage(e.target.value);
+                }}
+                className="border w-full border-gray-300 rounded p-1.5"
+              ></input>
             </div>
           </div>
 
           <div className="grid my-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
             <div>
               <p className="mb-1">Stock</p>
-              <input className="border w-full border-gray-300 rounded p-1.5"></input>
+              <input
+                onChange={(e) => {
+                  setstock(e.target.value);
+                }}
+                className="border w-full border-gray-300 rounded p-1.5"
+              ></input>
             </div>
 
             <div>
               <p className="mb-1">Precautions</p>
-              <input className="border w-full border-gray-300 rounded p-1.5"></input>
+              <input
+                onChange={(e) => {
+                  setprecaution(e.target.value);
+                }}
+                className="border w-full border-gray-300 rounded p-1.5"
+              ></input>
             </div>
 
             <div>
               <p className="mb-1">Cost</p>
-              <input className="border w-full border-gray-300 rounded p-1.5"></input>
+              <input
+                onChange={(e) => {
+                  setcost(e.target.value);
+                }}
+                className="border w-full border-gray-300 rounded p-1.5"
+              ></input>
             </div>
           </div>
 
           <div>
             <p className="mb-1">Storage Requirements</p>
-            <textarea className="border w-full h-20 border-gray-300 rounded p-1.5"></textarea>
+            <textarea
+              onChange={(e) => {
+                setstoreageRequirements(e.target.value);
+              }}
+              className="border w-full h-20 border-gray-300 rounded p-1.5"
+            ></textarea>
           </div>
 
           <div className="flex justify-end mt-5">
-            <button className="px-6 bg-[#333333] text-white p-2 rounded">
+            <button
+              onClick={() => {
+                submittingVccines();
+              }}
+              className="px-6 bg-[#333333] text-white p-2 rounded"
+            >
               + Add Vaccine
             </button>
           </div>
         </div>
       )}
+
+      <RenderingVaccine />
     </div>
   );
 }

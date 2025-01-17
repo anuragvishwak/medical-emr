@@ -55,7 +55,7 @@ function VaccineMedicine() {
         </div>
 
       </div>
-        <Vaccine openingVaccineForm = {openiningVaccineForm}/>
+        <Vaccine setopeningVaccineForm = {setopeningVaccineForm} openingVaccineForm = {openiningVaccineForm}/>
     </div>
   );
 }
