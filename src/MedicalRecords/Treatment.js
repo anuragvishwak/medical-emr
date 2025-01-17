@@ -199,33 +199,33 @@ function Treatment() {
               <p className="text-gray-500">{treat.treatmentType}</p>
 
               <div className="grid mt-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-              <div className="flex items-center">
-                <RiMedicineBottleLine size={30} className="text-gray-500" />
-                <div>
-                  <p className="font-semibold text-[#333333]">Medicine:</p>
-                  <div className="flex text-gray-500 items-center">
-                    <p>{treat.medicineName}</p>
-                    <span>-</span>
-                    <p>{treat.strength}</p>
+                <div className="flex items-center">
+                  <RiMedicineBottleLine size={30} className="text-gray-500" />
+                  <div>
+                    <p className="font-semibold text-[#333333]">Medicine:</p>
+                    <div className="flex text-gray-500 items-center">
+                      <p>{treat.medicineName}</p>
+                      <span>-</span>
+                      <p>{treat.strength}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="flex items-center">
-                <BiInjection className="text-gray-500" size={28} />
-                <div>
-                  <p className="font-semibold text-[#333333]">Dosage:</p>
-                  <p className="text-gray-500">{treat.dosage}</p>
+                <div className="flex items-center">
+                  <BiInjection className="text-gray-500" size={28} />
+                  <div>
+                    <p className="font-semibold text-[#333333]">Dosage:</p>
+                    <p className="text-gray-500">{treat.dosage}</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-center">
-                <RiPsychotherapyFill className="text-gray-500" size={28} />
-                <div>
-                  <p className="font-semibold text-[#333333]">Therapy:</p>
-                  <p className="text-gray-500">{treat.therapy}</p>
+                <div className="flex items-center">
+                  <RiPsychotherapyFill className="text-gray-500" size={28} />
+                  <div>
+                    <p className="font-semibold text-[#333333]">Therapy:</p>
+                    <p className="text-gray-500">{treat.therapy}</p>
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
           ))}
