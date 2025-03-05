@@ -52,7 +52,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
           </button>
         </div>
         <p className="font-semibold text-xl mb-1">Basic Information</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <div className="flex flex-col">
             <label className="font-semibold">Name</label>
           <input
@@ -124,6 +124,8 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
             ></textarea>
           </div>
         </div>
+
+       
 
        <div className="flex items-center mt-5">
       

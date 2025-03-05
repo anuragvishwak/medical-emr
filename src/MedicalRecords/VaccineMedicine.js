@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import Vaccine from "./Vaccine";
+import Medicine from "./Medicine";
 
 function VaccineMedicine() {
   const [medType, setmedType] = useState("vaccine");
   const [openiningVaccineForm, setopeningVaccineForm] = useState(false);
+  const [openingMedicineForm, setopeningMedicineForm] = useState(false);
+
   return (
     <div>
       <div className="sm:flex items-center my-3 justify-between">
@@ -14,7 +17,7 @@ function VaccineMedicine() {
         <div className="flex items-center">
           <button
             onClick={() => {
-                setopeningVaccineForm(!openiningVaccineForm);
+              setopeningVaccineForm(!openiningVaccineForm);
             }}
             className={`bg-[#333333] rounded text-white px-3 py-1 ${
               medType === "medicine" ? "hidden" : "block"
@@ -23,6 +26,9 @@ function VaccineMedicine() {
             Add Vaccine
           </button>
           <button
+            onClick={() => {
+              setopeningMedicineForm(!openingMedicineForm);
+            }}
             className={`bg-[#333333] rounded text-white px-3 py-1 ${
               medType === "vaccine" ? "hidden" : "block"
             }`}
@@ -53,9 +59,15 @@ function VaccineMedicine() {
             </button>
           </div>
         </div>
-
       </div>
-        <Vaccine setopeningVaccineForm = {setopeningVaccineForm} openingVaccineForm = {openiningVaccineForm}/>
+      {medType === "vaccine" ? (
+        <Vaccine
+          setopeningVaccineForm={setopeningVaccineForm}
+          openingVaccineForm={openiningVaccineForm}
+        />
+      ) : (
+        <Medicine setopeningMedicineForm = {setopeningMedicineForm} openingMedicineForm = {openingMedicineForm}/>
+      )}
     </div>
   );
 }
