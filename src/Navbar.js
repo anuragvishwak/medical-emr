@@ -17,13 +17,13 @@ function Navbar() {
     <div>
       <button
         onClick={() => setopeningNavbar(!openingNavbar)}
-        className="border-2 border-[#333333] sm:hidden rounded p-1"
+        className="border-2 text-[#34b1ff] border-[#34b1ff] sm:hidden rounded p-1"
       >
         <FaBars size={20} />
       </button>
 
       {openingNavbar && (
-        <div className="absolute top-14 shadow-xl z-50 border bg-[#333333] font-semibold text-white">
+        <div className="absolute top-14 shadow-xl z-50 border bg-[#34b1ff] font-semibold text-white">
           <div className="px-4 flex flex-col my-10">
             <Link to={"/"}>
               <button
@@ -105,9 +105,9 @@ function Navbar() {
         </div>
       )}
 
-      <div className="hidden sm:block border bg-[#333333] w-52 font-semibold text-white min-h-screen h-full">
+      <div className="hidden sm:block border bg-[#34b1ff] w-52 font-semibold text-white min-h-screen h-full">
         <div className="px-4 my-10">
-          <Link to={"/"}>
+          <Link to={"/Patient"}>
             <button
               className={`px-3 py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/"
@@ -123,20 +123,19 @@ function Navbar() {
           </Link>
 
           <Link to={"/StaffDetails"}>
-  <button
-    className={`mt-5 px-2 py-1 rounded ${
-      fetchingCurrentLocation.pathname === "/StaffDetails"
-        ? "border text-white border-white"
-        : ""
-    }`}
-  >
-    <div className="flex items-center">
-      <FaUser  className=" mr-1" />
-      Add Staff
-    </div>
-  </button>
-</Link>
-
+            <button
+              className={`mt-5 px-2 py-1 rounded ${
+                fetchingCurrentLocation.pathname === "/StaffDetails"
+                  ? "border text-white border-white"
+                  : ""
+              }`}
+            >
+              <div className="flex items-center">
+                <FaUser className=" mr-1" />
+                Add Staff
+              </div>
+            </button>
+          </Link>
 
           <div>
             <Link to={"/Appointment"}>
