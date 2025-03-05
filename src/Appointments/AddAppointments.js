@@ -15,7 +15,6 @@ function AddAppointments({ setopeningAppointmentForm }) {
   const [fees, setfees] = useState("");
   const [additionalNote, setadditionalNote] = useState("");
 
-
   async function gatheringPatientDetails() {
     const patientDetails = await getDocs(
       collection(database, "patient_details")
@@ -63,6 +62,20 @@ function AddAppointments({ setopeningAppointmentForm }) {
           </button>
         </div>
 
+        <div className="my-3">
+          <p>Are you creating appointment for existing patient:</p>
+          <div className="flex items-center w-56 justify-between">
+            <div className="flex items-center">
+              <input type="radio"></input>
+              <p className="ml-1">Existing User</p>
+            </div>
+            <div className="flex items-center">
+              <input type="radio"></input>
+              <p className="ml-1">New User</p>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="w-full">
             <p>Appointment Date</p>
@@ -74,7 +87,6 @@ function AddAppointments({ setopeningAppointmentForm }) {
               className=" border border-gray-400 w-72 sm:w-auto rounded px-4 py-1"
             />
           </div>
-
           <div className="">
             <p>Appointment Type</p>
             <select

@@ -33,9 +33,11 @@ function RenderingVaccine() {
             <p className="text-xl font-bold text-[#333333]">
               {vaccine.vaccineName}
             </p>
-        <div>
-        <p className="text-blue-500 bg-blue-100 px-3 rounded-full font-semibold">{vaccine.vaccineType}</p>
-        </div>
+            <div>
+              <p className="text-blue-500 bg-blue-100 px-3 rounded-full font-semibold">
+                {vaccine.vaccineType}
+              </p>
+            </div>
           </div>
 
           <div className="md:flex items-center my-4 justify-between">
@@ -58,16 +60,27 @@ function RenderingVaccine() {
             </div>
           </div>
 
-          <div className="bg-gray-50 text-sm sm:text-base p-3 mb-3 rounded-xl border">
-            <p className="font-semibold text-gray-700">Storage Requirements</p>
-            <p className="text-gray-500">{vaccine.storageRequirements}</p>
+          <div
+            className="border-l-8 
+          border-gray-300"
+          >
+            <div className="bg-gray-50 text-sm sm:text-base p-3 mb-3 border">
+              <p className="font-semibold text-gray-700">
+                Storage Requirements
+              </p>
+              <p className="text-gray-500">{vaccine.storageRequirements}</p>
+            </div>
           </div>
 
-          <div className="bg-gray-50 p-3 text-sm sm:text-base rounded-xl border">
-            <p className="font-semibold text-gray-700">Precautions</p>
-            <p className="text-gray-500">{vaccine.precaution}</p>
+          <div
+            className="border-l-8 
+          border-gray-300"
+          >
+            <div className="bg-gray-50 p-3 text-sm sm:text-base  border">
+              <p className="font-semibold text-gray-700">Precautions</p>
+              <p className="text-gray-500">{vaccine.precaution}</p>
+            </div>
           </div>
-
         </div>
       ))}
     </div>

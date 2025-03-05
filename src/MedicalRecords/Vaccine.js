@@ -35,9 +35,9 @@ function Vaccine({ openingVaccineForm, setopeningVaccineForm }) {
   return (
     <div>
       {openingVaccineForm && (
-        <div className="border p-3 rounded-xl border-gray-400">
+        <div className="border p-3 mb-5 rounded-xl border-gray-400">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full gap-5">
-            <div>rn
+            <div>
               <p className="mb-1">Name</p>
               <input
                 onChange={(e) => {
