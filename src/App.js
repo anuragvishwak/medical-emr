@@ -11,7 +11,8 @@ import MedicalRecords from "./MedicalRecords/MedicalRecords";
 import BillPay from "./Billing&Payment.js/BillPay";
 import StaffDetails from "./Staff/StaffDetails";
 import SingleLandingPage from "./SingleLandingPage";
-
+import PatientDashboard from "./Patient Portal/PatientDashboard";
+import PatientAppointment from "./Patient Portal/PatientAppointment";
 function App() {
   return (
     <div className="App">
@@ -23,6 +24,8 @@ function App() {
           <Route path="/MedicalRecords" element={<MedicalRecords />} />
           <Route path="/Billing&Payment" element={<BillPay />} />
           <Route path="/StaffDetails" element={<StaffDetails />} />
+          <Route path="/PatientDashboard" element={<PatientDashboard />} />
+          <Route path="/PatientAppointment" element={<PatientAppointment />} />
         </Routes>
       </Router>
     </div>
