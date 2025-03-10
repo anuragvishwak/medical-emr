@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { FaStethoscope } from "react-icons/fa";
 import img1 from "./loginBanner.png";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { database } from "./FirebaseConfig";
+
 
 function Login({ setopeningLogin }) {
   const navigation = useNavigate();
   const [currentTab, setcurrentTab] = useState("login");
   const [selectedRole, setSelectedRole] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const roles = [
     { label: "Doctor", value: "doctor" },
@@ -16,6 +23,34 @@ function Login({ setopeningLogin }) {
     { label: "Pharmacist", value: "pharmacist" },
     { label: "Administrator", value: "administrator" },
   ];
+
+  const handleLogin = async () => {
+    const auth = getAuth();
+
+    try {
+      // Sign in with email and password
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Check if the user is a patient
+      const patientQuery = query(
+        collection(database, "patient_details"),
+        where("email", "==", email)
+      );
+      const patientSnapshot = await getDocs(patientQuery);
+
+      if (!patientSnapshot.empty) {
+        // User is a patient
+        navigation("/PatientDashboard");
+      } else {
+        // User is staff
+        navigation("/Patient");
+      }
+    } catch (error) {
+      console.error("Error signing in: ", error);
+      toast.error("Invalid email or password");
+    }
+  };
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
@@ -61,33 +96,33 @@ function Login({ setopeningLogin }) {
         </div>
 
         <div
-            style={{
-              boxShadow:
-                "inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(0, 0, 0, 0.1)",
+          style={{
+            boxShadow:
+              "inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(0, 0, 0, 0.1)",
+          }}
+          className="bg-white sm:hidden w-[150px] p-2 shadow-inner rounded-full"
+        >
+          <button
+            onClick={() => {
+              setcurrentTab("login");
             }}
-            className="bg-white sm:hidden w-[150px] p-2 shadow-inner rounded-full"
+            className={`text-[#333333] py-1 font-semibold rounded-full px-3 ${
+              currentTab === "login" ? "bg-[#34b1ff] text-white shadow" : ""
+            }`}
           >
-            <button
-              onClick={() => {
-                setcurrentTab("login");
-              }}
-              className={`text-[#333333] py-1 font-semibold rounded-full px-3 ${
-                currentTab === "login" ? "bg-[#34b1ff] text-white shadow" : ""
-              }`}
-            >
-              Patient
-            </button>
-            <button
-              onClick={() => {
-                setcurrentTab("signup");
-              }}
-              className={`text-[#333333] py-1 font-semibold rounded-full px-3 ${
-                currentTab === "signup" ? "bg-[#34b1ff] text-white shadow" : ""
-              }`}
-            >
-              Staff
-            </button>
-          </div>
+            Patient
+          </button>
+          <button
+            onClick={() => {
+              setcurrentTab("signup");
+            }}
+            className={`text-[#333333] py-1 font-semibold rounded-full px-3 ${
+              currentTab === "signup" ? "bg-[#34b1ff] text-white shadow" : ""
+            }`}
+          >
+            Staff
+          </button>
+        </div>
 
         <div className="sm:flex items-center">
           <img src={img1} className="h-44 w-full sm:h-80" />
@@ -112,28 +147,30 @@ function Login({ setopeningLogin }) {
               ""
             )}
             <div className="grid grid-cols-1 sm:grid-col-2 sm:gap-5">
-            <div className="">
-              <p className="text-[#333333]  text-lg font-semibold">Email</p>
-              <input
-                placeholder="anurag@gmail.com"
-                className=" border w-full border-gray-400  rounded px-4 py-1"
-              ></input>
-            </div>
+              <div className="">
+                <p className="text-[#333333]  text-lg font-semibold">Email</p>
+                <input
+                  placeholder="anurag@gmail.com"
+                  className="border w-full border-gray-400 rounded px-4 py-1"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></input>
+              </div>
 
-            <div>
-              <p className="text-[#333333] text-lg font-semibold">Password</p>
-              <input
-                placeholder="anu200"
-                type="password"
-                className=" border w-72 border-gray-400  rounded px-4 sm:w-full py-1"
-              ></input>
-            </div>
+              <div>
+                <p className="text-[#333333] text-lg font-semibold">Password</p>
+                <input
+                  placeholder="anu200"
+                  type="password"
+                  className="border w-72 border-gray-400 rounded px-4 sm:w-full py-1"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></input>
+              </div>
             </div>
 
             <button
-              onClick={() => {
-                navigation("/Patient");
-              }}
+              onClick={handleLogin}
               className="bg-[#34b1ff] text-white w-full py-1 mt-7 rounded"
             >
               Proceed

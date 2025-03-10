@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import AddPatientForm from "./Patient Section/AddPatientForm";
 import { collection, getDocs } from "firebase/firestore";
 import { database } from "./FirebaseConfig";
-import { LuUser } from "react-icons/lu";
+import { LuMessageSquareMore, LuUser } from "react-icons/lu";
 import { CiMail, CiPhone } from "react-icons/ci";
-import { FaPencilAlt, FaPlus, FaUser } from "react-icons/fa";
-import { BiCalendar } from "react-icons/bi";
+import { FaBell, FaPencilAlt, FaPlus, FaUser } from "react-icons/fa";
+import { BiCalendar, BiNotification } from "react-icons/bi";
 import Navbar from "./Navbar";
 import { MdDelete } from "react-icons/md";
+import NotificationPortal from "./Notification/NotificationPortal";
 
 function Patient() {
   const [openingPatientForm, setOpeningPatientForm] = useState(false);
   const [patientDetails, setPatientDetails] = useState([]);
+  const [openingNotification, setopeningNotification] = useState(false);
 
   async function gatheringPatientDetails() {
     const patientDetails = await getDocs(
@@ -31,66 +33,76 @@ function Patient() {
   }, []);
 
   return (
-    <div className="bg-[#f7fcff] w-full sm:flex min-h-screen h-full">
-      <div className="flex items-center p-4 sm:p-0">
-      <Navbar />
-      <div className="sm:hidden">
-            <button
-              onClick={() => setOpeningPatientForm(true)}
-              className="text-[#34b1ff] font-bold"
-            >
-              <div className="flex border-2 mx-2 p-1.5 rounded border-[#34b1ff] items-center">
-                <FaUser className="" />
-              </div>
-            </button>
-          </div>
-        <p className="text-[#34b1ff] text-2xl sm:text-3xl sm:hidden font-semibold">
-          Patient Details
-        </p>
+    <div className="bg-[#f7fcff] flex">
+      <div>
+        <Navbar />
       </div>
+      {/* <div className="sm:hidden">
+        <button
+          onClick={() => setOpeningPatientForm(true)}
+          className="text-[#5F4BB6] font-bold"
+        >
+          <div className="flex border-2 mx-2 p-1.5 rounded border-[#5F4BB6] items-center">
+            <FaUser className="" />
+          </div>
+        </button>
+      </div>
+      <p className="text-[#5F4BB6] text-2xl sm:text-3xl sm:hidden font-semibold">
+        Patient Details
+      </p> */}
 
-      <div className="w-full px-5  sm:p-5">
-        <div className="flex justify-between">
-          <div>
-            <p className="text-xl text-[#34b1ff] hidden sm:block sm:text-3xl font-semibold">
+      <div className="h-screen overflow-auto w-full">
+        <div className="">
+          <div className="flex w-full p-3 bg-white shadow items-center justify-between">
+            <p className="text-xl text-[#5F4BB6] hidden sm:block sm:text-3xl font-semibold">
               Patient Details
             </p>
-            <p className="text-[#333333] hidden sm:block">
-              Here, you can manage patients and view their details seamlessly.
-            </p>
-          </div>
-          <div className="hidden sm:block">
-            <button
-              onClick={() => setOpeningPatientForm(true)}
-              className="text-[#34b1ff] font-bold"
-            >
-              <div className="flex items-center">
-                <FaUser className="mr-1" />
-                <p className="">Anurag Vishwakarma</p>
+
+            <div className="flex items-center">
+              <input
+                placeholder="search patients"
+                className=" border border-gray-300 rounded p-1"
+              ></input>
+              <div>
+                <button
+                  onClick={() => setOpeningPatientForm(true)}
+                  className="bg-[#5F4BB6] ml-3 sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
+                >
+                  <div className="flex items-center">
+                    <FaPlus className="mr-1" />
+                    Add Patient
+                  </div>
+                </button>
               </div>
-            </button>
+
+              <div>
+                <button
+                  onClick={() => {
+                    setopeningNotification(!openingNotification);
+                  }}
+                  className="bg-[#333333] text-white py-1 px-2 sm:px-4 rounded ml-3"
+                >
+                  <div className="flex items-center">
+                    <FaBell />
+                    <p className="ml-1 font-semibold">Notification</p>
+                  </div>
+                </button>
+              </div>
+              <span className="text-gray-300 text-2xl mx-1.5">|</span>
+              <button
+                onClick={() => setOpeningPatientForm(true)}
+                className="text-[#5F4BB6] font-bold"
+              >
+                <div className="flex items-center">
+                  <FaUser className="mr-1" />
+                  <p className="">Anurag Vishwakarma</p>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="flex border-y border-gray-300 py-2 my-2 items-center">
-          <input
-            placeholder="search patients"
-            className=" sm:w-60 border border-gray-300 rounded p-1.5"
-          ></input>
-          <div>
-            <button
-              onClick={() => setOpeningPatientForm(true)}
-              className="bg-[#34b1ff] ml-3 sm:mt-0 text-white font-bold text-sm sm:text-base py-1.5 px-2 sm:px-4 rounded"
-            >
-              <div className="flex items-center">
-                <FaPlus className="mr-1" />
-                Add Patient
-              </div>
-            </button>
-          </div>
-        </div>
-
-        <div className="grid overflow-auto h-screen sm:h-auto grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid p-5 grid-cols-1 sm:grid-cols-2 gap-5">
           {patientDetails.map((patient) => (
             <div
               key={patient.id}
@@ -142,10 +154,14 @@ function Patient() {
                   </div>
                 </div>
 
-                <hr className="my-2"/>
+                <hr className="my-2" />
                 <div className="flex items-center justify-end">
-                  <button className="text-blue-500"><FaPencilAlt size={18} /></button>
-                  <button className="ml-1 text-red-500"><MdDelete size={23} /></button>
+                  <button className="text-blue-500">
+                    <FaPencilAlt size={18} />
+                  </button>
+                  <button className="ml-1 text-red-500">
+                    <MdDelete size={23} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -158,6 +174,10 @@ function Patient() {
           gatheringPatientDetails={gatheringPatientDetails}
           setOpeningPatientForm={setOpeningPatientForm}
         />
+      )}
+
+      {openingNotification && (
+        <NotificationPortal setopeningNotification={setopeningNotification} />
       )}
     </div>
   );

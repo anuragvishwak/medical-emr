@@ -14,6 +14,10 @@ function AddAppointments({ setopeningAppointmentForm }) {
   const [selectPatient, setselectPatient] = useState("");
   const [fees, setfees] = useState("");
   const [additionalNote, setadditionalNote] = useState("");
+  const [gatheringDoctors, setgatheringDoctors] = useState([]);
+  const [selectedDoctor, setselctedDoctor] = useState("");
+
+  console.log(selectPatient, appointmentType);
 
   async function gatheringPatientDetails() {
     const patientDetails = await getDocs(
@@ -27,6 +31,16 @@ function AddAppointments({ setopeningAppointmentForm }) {
     setPatientDetails(multipleArray);
   }
 
+  async function renderingStaffDetails() {
+    const patientDetails = await getDocs(collection(database, "staff_details"));
+    let multipleArray = patientDetails.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    setgatheringDoctors(multipleArray);
+  }
+
   async function creatingAppointment() {
     try {
       await addDoc(collection(database, "appointment_details"), {
@@ -35,6 +49,7 @@ function AddAppointments({ setopeningAppointmentForm }) {
         patient: selectPatient,
         fees: fees,
         additionalNote: additionalNote,
+        doctor: selectedDoctor,
       });
       setopeningAppointmentForm(false);
       toast.success("Appointment created.");
@@ -45,6 +60,7 @@ function AddAppointments({ setopeningAppointmentForm }) {
 
   useEffect(() => {
     gatheringPatientDetails();
+    renderingStaffDetails();
   }, []);
 
   return (
@@ -107,7 +123,7 @@ function AddAppointments({ setopeningAppointmentForm }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 my-3 gap-5">
           <div>
-            <p>Select Patient</p>
+            <p>Patient</p>
             <select
               className="border w-full  p-1.5 rounded border-gray-400"
               onChange={(e) => {
@@ -115,6 +131,7 @@ function AddAppointments({ setopeningAppointmentForm }) {
                 setselectPatient(patient);
               }}
             >
+              <option>Select Patient</option>
               {patientDetails.map((patient) => (
                 <option key={patient.id} value={patient.name}>
                   {patient.name}
@@ -124,15 +141,50 @@ function AddAppointments({ setopeningAppointmentForm }) {
           </div>
 
           <div>
-            <p className="">Doctor Fees</p>
-            <input
+            <p>Doctor</p>
+            <select
               onChange={(e) => {
-                setfees(e.target.value);
+                setselctedDoctor(e.target.value);
               }}
-              placeholder="500/-"
-              className="border w-full border-gray-400 rounded p-1.5"
-            ></input>
+              className="border w-full  p-1.5 rounded border-gray-400"
+            >
+              <option>Select Doctor</option>
+              {gatheringDoctors.map((staff) => (
+                <>
+                  <option>{staff.name}</option>
+                </>
+              ))}
+            </select>
           </div>
+        </div>
+
+        <div>
+          <p className="font-semibold text-lg text-[#333333]">Selcted Doctor</p>
+          {gatheringDoctors
+            .filter((doc) => doc.name === selectedDoctor)
+            .map((doc) => (
+              <div>
+                <p className="text-[#333333] font-semibold">{doc.name}</p>
+                <div className="flex items-center">
+                  <p className="text-sm text-gray-400">{doc.email}</p>
+                  <span className="text-gray-400 mx-1">|</span>
+                  <p className="text-sm text-gray-400">{doc.role}</p>
+                  <span className="text-gray-400 mx-1">|</span>
+                  <p className="text-sm text-gray-400">{doc.department}</p>
+                </div>
+              </div>
+            ))}
+        </div>
+
+        <div className="mb-3">
+          <p className="">Doctor Fees</p>
+          <input
+            onChange={(e) => {
+              setfees(e.target.value);
+            }}
+            placeholder="500/-"
+            className="border w-full border-gray-400 rounded p-1.5"
+          ></input>
         </div>
 
         <div>
