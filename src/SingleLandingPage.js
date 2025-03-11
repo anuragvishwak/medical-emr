@@ -5,7 +5,8 @@ import img2 from "./vecteezy_medical-concept-operating-room-doctor-holding-a-tab
 import img3 from "./olga-guryanova-tMFeatBSS4s-unsplash.jpg";
 import { MdMonitorHeart } from "react-icons/md";
 import { LuHandshake } from "react-icons/lu";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 function SingleLandingPage() {
   const [openingLogin, setopeningLogin] = useState(false);
@@ -103,9 +104,15 @@ function SingleLandingPage() {
             onClick={() => {
               setopeningLogin(true);
             }}
-            className="bg-[#715AFF] ml-16 py-1 px-4 rounded-full text-white"
+            className="bg-[#715AFF] py-1.5 pl-4 pr-2 rounded-full text-white"
           >
-            Explore
+            <div className="flex items-center">
+              <p className="font-semibold mr-5">Explore</p>
+              <FaArrowRightLong
+                size={30}
+                className="bg-white text-[#715AFF] p-1.5 rounded-full"
+              />
+            </div>
           </button>
         </div>
         <div className="py-10 sm:py-20 px-5 sm:px-10">
@@ -200,9 +207,99 @@ function SingleLandingPage() {
               </div>
             </div>
           </div>
+
+          <div className="flex justify-center p-5 shadow-xl rounded-xl bg-white mb-10 sm:mb-20 mx-5 md:mx-10">
+            <div>
+              <div className="sm:flex justify-between">
+              <p className="text-[#715AFF] sm:hidden mb-3 text-center w-28 py-1 font-semibold rounded-full bg-[#eae6ff]">
+                  Features
+                </p>
+                <p className="text-[#102E4A] text-3xl font-semibold">
+                  Key Features
+                </p>
+                <p className="text-[#715AFF] hidden sm:block text-center w-28 py-1 font-semibold rounded-full bg-[#eae6ff]">
+                  Features
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6 ">
+                <div className="p-3 bg-[#f5f3ff] rounded-xl border border-[#c7bfff]">
+                  <p className="text-xl text-[#715AFF] font-semibold">
+                    Smart Appointment & Medication Tracking
+                  </p>
+                  <p className="text-[#102E4A] text-justify">
+                    Ensure patients never miss an appointment or medication.
+                    Automated reminders and scheduling tools keep both
+                    healthcare providers and patients informed, reducing
+                    no-shows and improving treatment adherence.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-[#f5f3ff] border border-[#c7bfff]">
+                  <p className="text-xl text-[#715AFF] font-semibold">
+                    Collaborative Lab Result Annotations
+                  </p>
+                  <p className="text-[#102E4A] text-justify">
+                    Doctors, nurses, and medical staff can comment on lab
+                    results, provide suggestions, and collaborate in real time.
+                    This feature enhances communication, speeds up
+                    decision-making, and ensures accurate patient diagnosis and
+                    care.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-[#f5f3ff] rounded-xl border border-[#c7bfff]">
+                  <p className="text-xl text-[#715AFF] font-semibold">
+                    Secure Digital Patient Records
+                  </p>
+                  <p className="text-[#102E4A] text-justify">
+                    Store, access, and update patient records securely in the
+                    cloud. The system ensures encrypted, real-time access to
+                    medical histories, prescriptions, and treatment plans,
+                    reducing paperwork and enhancing efficiency.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-[#f5f3ff] rounded-xl border border-[#c7bfff]">
+                  <p className="text-xl text-[#715AFF] font-semibold">
+                    Seamless E-Prescription Management
+                  </p>
+                  <p className="text-[#102E4A] text-justify">
+                    Eliminate prescription errors with digital prescriptions
+                    sent directly to pharmacies. This feature improves
+                    medication accuracy and enhances patient convenience.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-[#f5f3ff] rounded-xl border border-[#c7bfff]">
+                  <p className="text-xl text-[#715AFF] font-semibold">
+                    Notification Panel for Patients & Staff
+                  </p>
+                  <p className="text-[#102E4A] text-justify">
+                    Stay updated with real-time notifications! Patients receive
+                    appointment and medication reminders, while staff are
+                    alerted about new lab results, patient updates, and urgent
+                    cases.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-[#f5f3ff] rounded-xl border border-[#c7bfff]">
+                  <p className="text-xl text-[#715AFF] font-semibold">
+                    Integrated Billing & Insurance Management
+                  </p>
+                  <p className="text-[#102E4A] text-justify">
+                    Automate billing, insurance claims, and payment tracking
+                    with a seamless financial management system that reduces
+                    administrative workload and ensures faster reimbursements.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="bg-[#102E4A] py-10 sm:py-20 px-5 sm:px-10 text-white">
+
+      <div className="bg-[#102E4A] py-5 sm:py-20 px-5 sm:px-10 text-white">
         <div>
           <p className="text-3xl font-bold">Supporting your wellness journey</p>
           <p className="text-sm text-justify">
