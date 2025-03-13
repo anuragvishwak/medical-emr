@@ -37,7 +37,7 @@ function StaffDetails() {
 
   return (
     <div className="bg-[#eff7ff] sm:flex w-full min-h-screen h-full">
-      <div className="flex px-5 pt-5 items-center">
+      <div className="flex px-5 pt-5 sm:pt-0 sm:px-0 items-center">
         <Navbar />
         <div className="flex items-center sm:hidden">
           <input
@@ -56,7 +56,7 @@ function StaffDetails() {
         </div>
       </div>
       <div className="w-full ">
-        <div className="sm:flex hidden  bg-white shadow p-3 items-end mb-3 justify-between">
+        <div className="sm:flex hidden  bg-white shadow p-3 items-end  justify-between">
           <div>
             <p className="text-xl text-[#715AFF] hidden sm:block sm:text-3xl font-semibold">
               Staff Details
@@ -80,134 +80,133 @@ function StaffDetails() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-5 sm:p-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-3 sm:p-4">
           {gatheringStaffDetails.map((staff) => (
-            <div
-              key={staff.id}
-              className="p-3 border-l-8 border-[#715AFF] shadow-md bg-white"
-            >
-              <div className="">
-                <div className="flex items-center justify-between">
-                  <p className="sm:text-lg text-[#715AFF] font-bold">
-                    {staff.name}
-                  </p>
-                  <div className="sm:py flex items-center">
-                    <p className="font-bold text-pink-500 bg-pink-50 py-1 px-4 text-sm sm:text-base rounded mr-3">
-                      {staff.role}
+            <div key={staff.id} className="shadow-md border bg-white">
+              <div className="p-3">
+                <div className="">
+                  <div className="flex items-center justify-between">
+                    <p className="sm:text-lg text-[#715AFF] font-bold">
+                      {staff.name}
                     </p>
-                    <p
-                      className={`font-semibold py-1 px-4 text-sm sm:text-base rounded ${
-                        staff.workStatus === "Active"
-                          ? "bg-green-100 text-green-500"
-                          : "text-red-500 bg-red-100"
-                      }`}
-                    >
-                      {staff.workStatus}
-                    </p>
+                    <div className="sm:py flex items-center">
+                      <p className="font-bold text-pink-500 bg-pink-50 py-1 px-4 text-sm sm:text-base rounded mr-3">
+                        {staff.role}
+                      </p>
+                      <p
+                        className={`font-semibold py-1 px-4 text-sm sm:text-base rounded ${
+                          staff.workStatus === "Active"
+                            ? "bg-green-100 text-green-500"
+                            : "text-red-500 bg-red-100"
+                        }`}
+                      >
+                        {staff.workStatus}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="font-semibold flex items-center text-sm sm:text-base mt-2  text-[#102E4A]">
+                    <p className="">{staff.qualification}</p>
+                    <span className="mx-1">|</span>
+                    <p className="">{staff.specialization}</p>
+                    <span className="mx-1">|</span>
+                    <p className="">{staff.department}</p>
                   </div>
                 </div>
-                <div className="font-semibold mt-2 text-sm text-[#102E4A] grid grid-cols-3 sm:grid-cols-4">
-                  <p className="rounded-full">{staff.qualification}</p>
-                  <p className=" rounded-full">{staff.specialization}</p>
-                  <p className="rounded-full">{staff.department}</p>
-                  <p className="text-sm font-bold rounded-full">
-                    {staff.medicalLicenseNo}
-                  </p>
-                </div>
+
+                <AnimatePresence>
+                  {capturingStaffId === staff.id && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      <hr className="my-2" />
+                      <div className="">
+                        {/* Personal Information */}
+                        <div>
+                          <p className="text-xl text-[#333333] font-bold">
+                            Personal Information
+                          </p>
+                          <div className="flex items-center">
+                            <FaUser className="text-gray-500" />
+                            <p className="text-gray-500">Gender:</p>
+                            <p className="text-[#333333] ml-2 font-semibold capitalize">
+                              {staff.gender}
+                            </p>
+                          </div>
+                          <div className="flex items-center">
+                            <BiCalendarEvent className="text-gray-500" />
+                            <p className="text-gray-500">Date of Birth:</p>
+                            <p className="text-[#333333] ml-2 font-semibold">
+                              {staff.dob}
+                            </p>
+                          </div>
+                          <div className="flex items-center">
+                            <MdEmail className="text-gray-500" />
+                            <p className="text-gray-500">Email:</p>
+                            <p className="text-[#333333] ml-2 font-semibold">
+                              {staff.email}
+                            </p>
+                          </div>
+                          <div className="flex items-center">
+                            <BiPhone className="text-gray-500" />
+                            <p className="text-gray-500">Phone No:</p>
+                            <p className="text-[#333333] ml-2 font-semibold">
+                              +91 {staff.phoneNo}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Professional Information */}
+                        <div className="mt-5">
+                          <p className="text-xl text-[#333333] font-bold">
+                            Professional Information
+                          </p>
+                          <div className="flex items-center">
+                            <BiMedal className="text-gray-500" />
+                            <p className="text-gray-500">Experience:</p>
+                            <p className="text-[#333333] ml-2 font-semibold">
+                              {staff.yearOfExperience} yrs
+                            </p>
+                          </div>
+                          <div className="flex items-center">
+                            <FaClock className="text-gray-500" />
+                            <p className="text-gray-500">Shift:</p>
+                            <p className="text-[#333333] ml-2 font-semibold">
+                              {staff.shiftTiming}
+                            </p>
+                          </div>
+                          <div className="flex items-center">
+                            <FaRupeeSign className="text-gray-500" />
+                            <p className="text-gray-500">Income:</p>
+                            <p className="text-[#333333] ml-2 font-semibold">
+                              {staff.salaryAmount}/-
+                            </p>
+                          </div>
+                          <div className="flex items-center">
+                            <FaCalendar className="text-gray-500" />
+                            <p className="text-gray-500">Joined:</p>
+                            <p className="text-[#333333] ml-2 font-semibold">
+                              {staff.dateOfJoining}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
-              <AnimatePresence>
-                {capturingStaffId === staff.id && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    <hr className="my-2" />
-                    <div className="">
-                      {/* Personal Information */}
-                      <div>
-                        <p className="text-xl text-[#333333] font-bold">
-                          Personal Information
-                        </p>
-                        <div className="flex items-center">
-                          <FaUser className="text-gray-500" />
-                          <p className="text-gray-500">Gender:</p>
-                          <p className="text-[#333333] ml-2 font-semibold capitalize">
-                            {staff.gender}
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <BiCalendarEvent className="text-gray-500" />
-                          <p className="text-gray-500">Date of Birth:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">
-                            {staff.dob}
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <MdEmail className="text-gray-500" />
-                          <p className="text-gray-500">Email:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">
-                            {staff.email}
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <BiPhone className="text-gray-500" />
-                          <p className="text-gray-500">Phone No:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">
-                            +91 {staff.phoneNo}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Professional Information */}
-                      <div className="mt-5">
-                        <p className="text-xl text-[#333333] font-bold">
-                          Professional Information
-                        </p>
-                        <div className="flex items-center">
-                          <BiMedal className="text-gray-500" />
-                          <p className="text-gray-500">Experience:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">
-                            {staff.yearOfExperience} yrs
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <FaClock className="text-gray-500" />
-                          <p className="text-gray-500">Shift:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">
-                            {staff.shiftTiming}
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <FaRupeeSign className="text-gray-500" />
-                          <p className="text-gray-500">Income:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">
-                            {staff.salaryAmount}/-
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <FaCalendar className="text-gray-500" />
-                          <p className="text-gray-500">Joined:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">
-                            {staff.dateOfJoining}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div className="flex items-end mt-5 justify-end">
+              <div className="flex items-center bg-[#715AFF] mt-5 p-2 justify-between">
+                <p className="font-bold text-white">{staff.medicalLicenseNo}</p>
                 <button
                   onClick={() =>
                     setcapturingStaffId(
                       capturingStaffId === staff.id ? null : staff.id
                     )
                   }
-                  className="bg-[#102E4A] sm:mt-0 text-white font-bold text-sm py-1 px-2 sm:px-4 rounded"
+                  className="bg-[#102E4A] sm:mt-0 text-white font-bold text-sm py-1 px-2 sm:px-4 "
                 >
                   {capturingStaffId === staff.id ? "Close" : "View More"}
                 </button>

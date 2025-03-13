@@ -143,7 +143,7 @@ function Patient() {
           </div>
         </div>
 
-        <div className="grid p-5 sm:p-3 grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid p-5 sm:p-4 grid-cols-1 sm:grid-cols-3 gap-4">
           {patientDetails.map((patient) => {
             const initials = patient.name.slice(0, 2).toUpperCase();
             const bgColor =
@@ -151,7 +151,7 @@ function Patient() {
             return (
               <div
                 key={patient.id}
-                className="bg-white p-5 shadow"
+                className="bg-white border p-5 shadow"
               >
                 <div className="flex items-start  justify-between">
                   <div className="flex items-center">
