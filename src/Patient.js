@@ -151,7 +151,7 @@ function Patient() {
             return (
               <div
                 key={patient.id}
-                className="bg-white border p-5 rounded-lg shadow"
+                className="bg-white p-5 shadow"
               >
                 <div className="flex items-start  justify-between">
                   <div className="flex items-center">

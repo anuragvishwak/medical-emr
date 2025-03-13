@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaCalendar, FaClock, FaPlus, FaRupeeSign, FaUser } from "react-icons/fa";
+import {
+  FaCalendar,
+  FaClock,
+  FaPlus,
+  FaRupeeSign,
+  FaUser,
+} from "react-icons/fa";
 import AddStaff from "./AddStaff";
 import { collection, getDocs } from "firebase/firestore";
 import { database } from "../FirebaseConfig";
@@ -15,7 +21,9 @@ function StaffDetails() {
   const [capturingStaffId, setcapturingStaffId] = useState(null);
 
   async function renderingStaffDetails() {
-    const appointmentDetails = await getDocs(collection(database, "staff_details"));
+    const appointmentDetails = await getDocs(
+      collection(database, "staff_details")
+    );
     let multipleArray = appointmentDetails.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -28,12 +36,27 @@ function StaffDetails() {
   }, []);
 
   return (
-    <div className="bg-[#f7fcff] flex w-full sm:flex min-h-screen h-full">
-      <div>
+    <div className="bg-[#eff7ff] sm:flex w-full min-h-screen h-full">
+      <div className="flex px-5 pt-5 items-center">
         <Navbar />
+        <div className="flex items-center sm:hidden">
+          <input
+            placeholder="Search Staffs"
+            className="border border-gray-300 rounded p-1 ml-2"
+          />
+          <button
+            onClick={() => setopeningAddStaffForm(true)}
+            className="bg-[#715AFF] ml-2 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
+          >
+            <div className="flex items-center">
+              <FaPlus className="mr-1" />
+              Add Staff
+            </div>
+          </button>
+        </div>
       </div>
       <div className="w-full ">
-        <div className="flex bg-white shadow p-3 items-end mb-3 sm:mb-5 justify-between">
+        <div className="sm:flex hidden  bg-white shadow p-3 items-end mb-3 justify-between">
           <div>
             <p className="text-xl text-[#715AFF] hidden sm:block sm:text-3xl font-semibold">
               Staff Details
@@ -42,11 +65,12 @@ function StaffDetails() {
           <div>
             <input
               placeholder="Search Staffs"
-              className="border border-gray-300 rounded p-1"
+              className="border border-gray-300 rounded p-1.5"
             />
             <button
               onClick={() => setopeningAddStaffForm(true)}
-              className="bg-[#715AFF] ml-2 mt-2 sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
+              className="bg-[#715AFF] ml-2 mt-2 sm:mt-0 text-white font-bold text-sm sm:text-base 
+              py-1.5 px-2 sm:px-4 rounded"
             >
               <div className="flex items-center">
                 <FaPlus className="mr-1" />
@@ -56,26 +80,23 @@ function StaffDetails() {
           </div>
         </div>
 
-        <div className="px-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-5 sm:p-3">
           {gatheringStaffDetails.map((staff) => (
-            <div key={staff.id} className="p-5 border-l-8 border-[#715AFF] mb-5 shadow-md bg-white">
+            <div
+              key={staff.id}
+              className="p-3 border-l-8 border-[#715AFF] shadow-md bg-white"
+            >
               <div className="">
-                <div className="sm:flex items-center justify-between">
-                  <p className="text-2xl text-[#715AFF] font-bold">{staff.name}</p>
+                <div className="flex items-center justify-between">
+                  <p className="sm:text-lg text-[#715AFF] font-bold">
+                    {staff.name}
+                  </p>
                   <div className="sm:py flex items-center">
-                    <button
-                      onClick={() =>
-                        setcapturingStaffId(capturingStaffId === staff.id ? null : staff.id)
-                      }
-                      className="bg-[#102E4A] sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
-                    >
-                      {capturingStaffId === staff.id ? "Close" : "View More"}
-                    </button>
-                    <p className="font-bold text-pink-500 bg-pink-50 py-1 px-4 rounded mx-3">
+                    <p className="font-bold text-pink-500 bg-pink-50 py-1 px-4 text-sm sm:text-base rounded mr-3">
                       {staff.role}
                     </p>
                     <p
-                      className={`font-semibold py-1 px-4 rounded ${
+                      className={`font-semibold py-1 px-4 text-sm sm:text-base rounded ${
                         staff.workStatus === "Active"
                           ? "bg-green-100 text-green-500"
                           : "text-red-500 bg-red-100"
@@ -85,17 +106,16 @@ function StaffDetails() {
                     </p>
                   </div>
                 </div>
-                <div className="flex font-semibold text-sm text-[#102E4A] items-center">
+                <div className="font-semibold mt-2 text-sm text-[#102E4A] grid grid-cols-3 sm:grid-cols-4">
                   <p className="rounded-full">{staff.qualification}</p>
-                  <p className="mx-2 rounded-full">{staff.specialization}</p>
-                  <p className="mr-2 rounded-full">{staff.department}</p>
+                  <p className=" rounded-full">{staff.specialization}</p>
+                  <p className="rounded-full">{staff.department}</p>
                   <p className="text-sm font-bold rounded-full">
                     {staff.medicalLicenseNo}
                   </p>
                 </div>
               </div>
 
-            
               <AnimatePresence>
                 {capturingStaffId === staff.id && (
                   <motion.div
@@ -105,10 +125,12 @@ function StaffDetails() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
                     <hr className="my-2" />
-                    <div className="sm:flex justify-between">
+                    <div className="">
                       {/* Personal Information */}
                       <div>
-                        <p className="text-xl text-[#333333] font-bold">Personal Information</p>
+                        <p className="text-xl text-[#333333] font-bold">
+                          Personal Information
+                        </p>
                         <div className="flex items-center">
                           <FaUser className="text-gray-500" />
                           <p className="text-gray-500">Gender:</p>
@@ -119,23 +141,31 @@ function StaffDetails() {
                         <div className="flex items-center">
                           <BiCalendarEvent className="text-gray-500" />
                           <p className="text-gray-500">Date of Birth:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">{staff.dob}</p>
+                          <p className="text-[#333333] ml-2 font-semibold">
+                            {staff.dob}
+                          </p>
                         </div>
                         <div className="flex items-center">
                           <MdEmail className="text-gray-500" />
                           <p className="text-gray-500">Email:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">{staff.email}</p>
+                          <p className="text-[#333333] ml-2 font-semibold">
+                            {staff.email}
+                          </p>
                         </div>
                         <div className="flex items-center">
                           <BiPhone className="text-gray-500" />
                           <p className="text-gray-500">Phone No:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">+91 {staff.phoneNo}</p>
+                          <p className="text-[#333333] ml-2 font-semibold">
+                            +91 {staff.phoneNo}
+                          </p>
                         </div>
                       </div>
 
                       {/* Professional Information */}
-                      <div>
-                        <p className="text-xl text-[#333333] font-bold">Professional Information</p>
+                      <div className="mt-5">
+                        <p className="text-xl text-[#333333] font-bold">
+                          Professional Information
+                        </p>
                         <div className="flex items-center">
                           <BiMedal className="text-gray-500" />
                           <p className="text-gray-500">Experience:</p>
@@ -160,19 +190,36 @@ function StaffDetails() {
                         <div className="flex items-center">
                           <FaCalendar className="text-gray-500" />
                           <p className="text-gray-500">Joined:</p>
-                          <p className="text-[#333333] ml-2 font-semibold">{staff.dateOfJoining}</p>
+                          <p className="text-[#333333] ml-2 font-semibold">
+                            {staff.dateOfJoining}
+                          </p>
                         </div>
                       </div>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
+
+              <div className="flex items-end mt-5 justify-end">
+                <button
+                  onClick={() =>
+                    setcapturingStaffId(
+                      capturingStaffId === staff.id ? null : staff.id
+                    )
+                  }
+                  className="bg-[#102E4A] sm:mt-0 text-white font-bold text-sm py-1 px-2 sm:px-4 rounded"
+                >
+                  {capturingStaffId === staff.id ? "Close" : "View More"}
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {openingAddStaffForm && <AddStaff setopeningAddStaffForm={setopeningAddStaffForm}/>}
+      {openingAddStaffForm && (
+        <AddStaff setopeningAddStaffForm={setopeningAddStaffForm} />
+      )}
     </div>
   );
 }
