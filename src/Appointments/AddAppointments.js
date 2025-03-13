@@ -7,7 +7,10 @@ import { database } from "../FirebaseConfig";
 import { FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-function AddAppointments({ setopeningAppointmentForm }) {
+function AddAppointments({
+  setopeningAppointmentForm,
+  gatheringAppointmentDetails,
+}) {
   const [startDate, setstartDate] = useState("");
   const [patientDetails, setPatientDetails] = useState([]);
   const [appointmentType, setappointmentType] = useState("");
@@ -53,6 +56,7 @@ function AddAppointments({ setopeningAppointmentForm }) {
       });
       setopeningAppointmentForm(false);
       toast.success("Appointment created.");
+      gatheringAppointmentDetails();
     } catch {
       toast.error("something went wrong");
     }
@@ -76,20 +80,6 @@ function AddAppointments({ setopeningAppointmentForm }) {
           >
             Close
           </button>
-        </div>
-
-        <div className="my-3">
-          <p>Are you creating appointment for existing patient:</p>
-          <div className="flex items-center w-56 justify-between">
-            <div className="flex items-center">
-              <input type="radio"></input>
-              <p className="ml-1">Existing User</p>
-            </div>
-            <div className="flex items-center">
-              <input type="radio"></input>
-              <p className="ml-1">New User</p>
-            </div>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -198,17 +188,19 @@ function AddAppointments({ setopeningAppointmentForm }) {
           ></textarea>
         </div>
 
-        <button
-          onClick={() => {
-            creatingAppointment();
-          }}
-          className="w-full mt-5 bg-[#333333] text-white p-2 rounded"
-        >
-          <div className="flex justify-center items-center">
-            <FaPlus className="mr-2" />
-            Add Appointment
-          </div>
-        </button>
+        <div className="flex justify-end">
+          <button
+            onClick={() => {
+              creatingAppointment();
+            }}
+            className="px-10 mt-5 bg-[#102E4A] text-white py-2 rounded"
+          >
+            <div className="flex justify-center items-center">
+              <FaPlus className="mr-2" />
+              Add Appointment
+            </div>
+          </button>
+        </div>
       </div>
     </div>
   );

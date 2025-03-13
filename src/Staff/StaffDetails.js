@@ -33,9 +33,9 @@ function StaffDetails() {
         <Navbar />
       </div>
       <div className="w-full ">
-        <div className="flex bg-white shadow p-4 items-end mb-3 sm:mb-5 justify-between">
+        <div className="flex bg-white shadow p-3 items-end mb-3 sm:mb-5 justify-between">
           <div>
-            <p className="text-xl text-[#34b1ff] hidden sm:block sm:text-3xl font-semibold">
+            <p className="text-xl text-[#715AFF] hidden sm:block sm:text-3xl font-semibold">
               Staff Details
             </p>
           </div>
@@ -46,7 +46,7 @@ function StaffDetails() {
             />
             <button
               onClick={() => setopeningAddStaffForm(true)}
-              className="bg-[#333333] ml-2 mt-2 sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
+              className="bg-[#715AFF] ml-2 mt-2 sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
             >
               <div className="flex items-center">
                 <FaPlus className="mr-1" />
@@ -58,16 +58,16 @@ function StaffDetails() {
 
         <div className="px-5">
           {gatheringStaffDetails.map((staff) => (
-            <div key={staff.id} className="p-5 mb-5 shadow-md bg-white">
-              <div>
+            <div key={staff.id} className="p-5 border-l-8 border-[#715AFF] mb-5 shadow-md bg-white">
+              <div className="">
                 <div className="sm:flex items-center justify-between">
-                  <p className="text-2xl text-[#333333] font-bold">{staff.name}</p>
+                  <p className="text-2xl text-[#715AFF] font-bold">{staff.name}</p>
                   <div className="sm:py flex items-center">
                     <button
                       onClick={() =>
                         setcapturingStaffId(capturingStaffId === staff.id ? null : staff.id)
                       }
-                      className="bg-[#34b1ff] sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
+                      className="bg-[#102E4A] sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
                     >
                       {capturingStaffId === staff.id ? "Close" : "View More"}
                     </button>
@@ -85,7 +85,7 @@ function StaffDetails() {
                     </p>
                   </div>
                 </div>
-                <div className="flex font-semibold text-sm text-[#333333] items-center">
+                <div className="flex font-semibold text-sm text-[#102E4A] items-center">
                   <p className="rounded-full">{staff.qualification}</p>
                   <p className="mx-2 rounded-full">{staff.specialization}</p>
                   <p className="mr-2 rounded-full">{staff.department}</p>
@@ -171,6 +171,8 @@ function StaffDetails() {
           ))}
         </div>
       </div>
+
+      {openingAddStaffForm && <AddStaff setopeningAddStaffForm={setopeningAddStaffForm}/>}
     </div>
   );
 }

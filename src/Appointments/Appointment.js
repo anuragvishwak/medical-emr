@@ -29,27 +29,29 @@ function Appointment() {
     <div className="bg-gray-50  sm:flex min-h-screen h-full">
       <div className="flex p-4 sm:p-0">
         <Navbar />
-        <p className="text-3xl ml-2 sm:hidden text-[#333333] font-semibold">Appointments</p>
       </div>
       <div className="w-full overflow-auto h-screen px-5 sm:p-5">
-        <div className="flex items-end mb-5 justify-between">
+        <div className="flex bg-white shadow p-3 items-end mb-3 sm:mb-5 justify-between">
           <div>
-            <p className="text-3xl hidden sm:block text-[#333333] font-semibold">Appointments</p>
-            <p className="text-gray-400 hidden sm:block">
-              Here, you can manage Appointments and manage seamlessly.
+            <p className="text-xl text-[#715AFF] hidden sm:block sm:text-3xl font-semibold">
+              Appointment Details
             </p>
           </div>
-          <button
-            onClick={() => {
-              setopeningAppointmentForm(true);
-            }}
-            className="bg-[#333333] text-white font-bold text-sm p-2 sm:px-4 rounded"
-          >
-            <div className="flex items-center">
-              <FaPlus className="mr-1" />
-              Add Appointment
-            </div>
-          </button>
+          <div>
+            <input
+              placeholder="Search Appointments"
+              className="border border-gray-300 rounded p-1"
+            />
+            <button
+              onClick={() => setopeningAppointmentForm(true)}
+              className="bg-[#715AFF] ml-2 mt-2 sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
+            >
+              <div className="flex items-center">
+                <FaPlus className="mr-1" />
+                Add Appointment
+              </div>
+            </button>
+          </div>
         </div>
 
         <div>
@@ -110,6 +112,7 @@ function Appointment() {
       {openingAppointmentForm && (
         <AddAppointments
           setopeningAppointmentForm={setopeningAppointmentForm}
+          gatheringAppointmentDetails={gatheringAppointmentDetails}
         />
       )}
     </div>

@@ -15,6 +15,35 @@ function Patient() {
   const [patientDetails, setPatientDetails] = useState([]);
   const [openingNotification, setopeningNotification] = useState(false);
 
+  const colorMap = {
+    A: "#26F0F1",
+    B: "#33FF57",
+    C: "#5733FF",
+    D: "#FF33A1",
+    E: "#A133FF",
+    F: "#33A1FF",
+    G: "#FFA133",
+    H: "#33FFA1",
+    I: "#A1FF33",
+    J: "#26F0F1",
+    K: "#33FF57",
+    L: "#5733FF",
+    M: "#FF33A1",
+    N: "#A133FF",
+    O: "#33A1FF",
+    P: "#FFA133",
+    Q: "#33FFA1",
+    R: "#A1FF33",
+    S: "#26F0F1",
+    T: "#33FF57",
+    U: "#5733FF",
+    V: "#FF33A1",
+    W: "#A133FF",
+    X: "#33A1FF",
+    Y: "#FFA133",
+    Z: "#33FFA1",
+  };
+
   async function gatheringPatientDetails() {
     const patientDetails = await getDocs(
       collection(database, "patient_details")
@@ -33,28 +62,40 @@ function Patient() {
   }, []);
 
   return (
-    <div className="bg-[#f7fcff] flex">
-      <div>
+    <div className="bg-[#eff7ff] sm:flex">
+      <div className="flex px-5 pt-5 sm:pt-0 sm:px-0 sm:block items-center">
         <Navbar />
+        <div className=" sm:hidden">
+          <button
+            onClick={() => setOpeningPatientForm(true)}
+            className="bg-[#715AFF] ml-3 sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
+          >
+            <div className="flex items-center">
+              <FaPlus className="mr-1" />
+              Add Patient
+            </div>
+          </button>
+        </div>
+
+        <div className="sm:hidden">
+          <button
+            onClick={() => {
+              setopeningNotification(!openingNotification);
+            }}
+            className="bg-[#102E4A] text-white py-1 px-2 sm:px-4 rounded ml-3"
+          >
+            <div className="flex items-center">
+              <FaBell />
+              <p className="ml-1 font-semibold">Notification</p>
+            </div>
+          </button>
+        </div>
       </div>
-      {/* <div className="sm:hidden">
-        <button
-          onClick={() => setOpeningPatientForm(true)}
-          className="text-[#5F4BB6] font-bold"
-        >
-          <div className="flex border-2 mx-2 p-1.5 rounded border-[#5F4BB6] items-center">
-            <FaUser className="" />
-          </div>
-        </button>
-      </div>
-      <p className="text-[#5F4BB6] text-2xl sm:text-3xl sm:hidden font-semibold">
-        Patient Details
-      </p> */}
 
       <div className="h-screen overflow-auto w-full">
-        <div className="">
+        <div className="hidden sm:block">
           <div className="flex w-full p-3 bg-white shadow items-center justify-between">
-            <p className="text-xl text-[#5F4BB6] hidden sm:block sm:text-3xl font-semibold">
+            <p className="text-xl text-[#715AFF] hidden sm:block sm:text-3xl font-semibold">
               Patient Details
             </p>
 
@@ -66,7 +107,7 @@ function Patient() {
               <div>
                 <button
                   onClick={() => setOpeningPatientForm(true)}
-                  className="bg-[#5F4BB6] ml-3 sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
+                  className="bg-[#715AFF] ml-3 sm:mt-0 text-white font-bold text-sm sm:text-base py-1 px-2 sm:px-4 rounded"
                 >
                   <div className="flex items-center">
                     <FaPlus className="mr-1" />
@@ -80,7 +121,7 @@ function Patient() {
                   onClick={() => {
                     setopeningNotification(!openingNotification);
                   }}
-                  className="bg-[#333333] text-white py-1 px-2 sm:px-4 rounded ml-3"
+                  className="bg-[#102E4A] text-white py-1 px-2 sm:px-4 rounded ml-3"
                 >
                   <div className="flex items-center">
                     <FaBell />
@@ -91,7 +132,7 @@ function Patient() {
               <span className="text-gray-300 text-2xl mx-1.5">|</span>
               <button
                 onClick={() => setOpeningPatientForm(true)}
-                className="text-[#5F4BB6] font-bold"
+                className="text-[#715AFF] font-bold"
               >
                 <div className="flex items-center">
                   <FaUser className="mr-1" />
@@ -102,70 +143,96 @@ function Patient() {
           </div>
         </div>
 
-        <div className="grid p-5 grid-cols-1 sm:grid-cols-2 gap-5">
-          {patientDetails.map((patient) => (
-            <div
-              key={patient.id}
-              className="bg-white border p-5 rounded-lg shadow"
-            >
-              <div>
-                <p className="font-bold text-xl">{patient.name}</p>
-                <p className="text-gray-400">{patient.email}</p>
+        <div className="grid p-5 sm:p-3 grid-cols-1 sm:grid-cols-3 gap-3">
+          {patientDetails.map((patient) => {
+            const initials = patient.name.slice(0, 2).toUpperCase();
+            const bgColor =
+              colorMap[patient.name[0].toUpperCase()] || "#CCCCCC";
+            return (
+              <div
+                key={patient.id}
+                className="bg-white border p-5 rounded-lg shadow"
+              >
+                <div className="flex items-start  justify-between">
+                  <div className="flex items-center">
+                    <p
+                      style={{ backgroundColor: bgColor }}
+                      className="mr-3 rounded-full py-1 px-1.5 text-lg font-bold"
+                    >
+                      {initials}
+                    </p>
+                    <div>
+                      <p className="font-bold text-[#715AFF]">{patient.name}</p>
+                      <p className="text-[#102E4A] text-sm">{patient.email}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center">
+                    <button className="text-[#715AFF]">
+                      <FaPencilAlt size={18} />
+                    </button>
+                    <button className="ml-1 text-[#102E4A]">
+                      <MdDelete size={23} />
+                    </button>
+                  </div>
+                </div>
+                <hr className="my-5" />
+                <div className="">
+                  <div className="grid grid-cols-2 gap-5">
+                    <div className="flex items-center">
+                      <LuUser
+                        size={30}
+                        className="bg-[#e9e5fb] text-[#715AFF] p-1 rounded"
+                      />
+                      <div className="ml-2">
+                        <p className="font-semibold text-sm">Age</p>
+                        <p className="text-gray-400">{patient.age} Years</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center">
+                      <CiPhone
+                        size={30}
+                        className="bg-[#e9e5fb] text-[#715AFF] p-1 rounded"
+                      />
+                      <div className="ml-2">
+                        <p className="font-semibold text-sm">Phone</p>
+                        <p className="text-gray-400">{patient.phoneNo}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-5">
+                    <div className="flex items-center">
+                      <BiCalendar
+                        size={30}
+                        className="bg-[#e9e5fb] text-[#715AFF] p-1 rounded"
+                      />
+                      <div className="ml-2">
+                        <p className="font-semibold text-sm">Date of Birth</p>
+                        <p className="text-gray-400">
+                          {new Date(
+                            patient?.dob?.seconds * 1000
+                          ).toLocaleDateString("en-GB")}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center">
+                      <LuUser
+                        size={30}
+                        className="bg-[#e9e5fb] text-[#715AFF] p-1 rounded"
+                      />
+                      <div className="ml-2">
+                        <p className="font-semibold text-sm">Gender</p>
+                        <p className="text-gray-400">{patient.gender}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <hr className="my-3" />
-              <div className="">
-                <div className="grid grid-cols-2 gap-5">
-                  <div className="flex items-center">
-                    <LuUser size={30} className="bg-gray-200 p-1 rounded" />
-                    <div className="ml-2">
-                      <p className="font-semibold text-sm">Age</p>
-                      <p className="text-gray-400">{patient.age} Years</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <CiPhone size={30} className="bg-gray-200 p-1 rounded" />
-                    <div className="ml-2">
-                      <p className="font-semibold text-sm">Phone</p>
-                      <p className="text-gray-400">+91 {patient.phoneNo}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-5">
-                  <div className="flex items-center">
-                    <BiCalendar size={30} className="bg-gray-200 p-1 rounded" />
-                    <div className="ml-2">
-                      <p className="font-semibold text-sm">Date of Birth</p>
-                      <p className="text-gray-400">
-                        {new Date(
-                          patient?.dob?.seconds * 1000
-                        ).toLocaleDateString("en-GB")}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <LuUser size={30} className="bg-gray-200 p-1 rounded" />
-                    <div className="ml-2">
-                      <p className="font-semibold text-sm">Gender</p>
-                      <p className="text-gray-400">{patient.gender}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <hr className="my-2" />
-                <div className="flex items-center justify-end">
-                  <button className="text-blue-500">
-                    <FaPencilAlt size={18} />
-                  </button>
-                  <button className="ml-1 text-red-500">
-                    <MdDelete size={23} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

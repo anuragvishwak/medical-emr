@@ -20,7 +20,7 @@ function SingleLandingPage() {
           <div className="flex items-center">
             <button
               onClick={() => {
-                setopeningNavbar(!openingNavbar);
+              setopeningNavbar(!openingNavbar);
               }}
               className="mr-2 border-2 border-[#102E4A] text-[#102E4A] p-1 rounded sm:hidden"
             >
