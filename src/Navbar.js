@@ -7,11 +7,14 @@ import {
   FaFileMedicalAlt,
   FaUser,
 } from "react-icons/fa";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { LuLogOut } from "react-icons/lu";
 
 function Navbar() {
   const fetchingCurrentLocation = useLocation();
   const [openingNavbar, setopeningNavbar] = useState(false);
+
+  const navigation = useNavigate();
 
   return (
     <div>
@@ -25,11 +28,11 @@ function Navbar() {
       {openingNavbar && (
         <div className="absolute top-14 shadow-xl z-50 border bg-[#34b1ff] font-semibold text-white">
           <div className="px-4 flex flex-col my-10">
-            <Link to={"/"}>
+            <Link to={"/Patient"}>
               <button
                 className={`px-3 py-1 rounded ${
                   fetchingCurrentLocation.pathname === "/"
-                    ? "border text-white border-white"
+                    ? "text-white bg-[#715AFF]"
                     : ""
                 }`}
               >
@@ -44,7 +47,7 @@ function Navbar() {
               <button
                 className={`mt-5 px-2 py-1 rounded ${
                   fetchingCurrentLocation.pathname === "/StaffDetails"
-                    ? "border text-white border-white"
+                    ? "text-white bg-[#715AFF]"
                     : ""
                 }`}
               >
@@ -60,7 +63,7 @@ function Navbar() {
                 <button
                   className={`mt-5 px-3 py-1 rounded ${
                     fetchingCurrentLocation.pathname === "/Appointment"
-                      ? "border text-white border-white"
+                      ? "text-white bg-[#715AFF]"
                       : ""
                   }`}
                 >
@@ -76,7 +79,7 @@ function Navbar() {
               <button
                 className={`my-5 px-3 py-1 rounded ${
                   fetchingCurrentLocation.pathname === "/MedicalRecords"
-                    ? "border text-white border-white"
+                    ? "text-white bg-[#715AFF]"
                     : ""
                 }`}
               >
@@ -91,7 +94,7 @@ function Navbar() {
               <button
                 className={` px-2 py-1 rounded ${
                   fetchingCurrentLocation.pathname === "/Billing&Payment"
-                    ? "border text-white border-white"
+                    ? "text-white bg-[#715AFF]"
                     : ""
                 }`}
               >
@@ -105,13 +108,13 @@ function Navbar() {
         </div>
       )}
 
-      <div className="hidden sm:block border bg-[#34b1ff] w-52 font-semibold text-white min-h-screen h-full">
+      <div className="hidden sm:block border bg-[#102E4A] w-52 font-semibold text-white min-h-screen h-full">
         <div className="px-4 my-10">
           <Link to={"/Patient"}>
             <button
-              className={`px-3 py-1 rounded ${
-                fetchingCurrentLocation.pathname === "/"
-                  ? "border text-white border-white"
+              className={`px-3 w-full py-1 rounded ${
+                fetchingCurrentLocation.pathname === "/Patient"
+                  ? "text-white bg-[#715AFF]"
                   : ""
               }`}
             >
@@ -124,9 +127,9 @@ function Navbar() {
 
           <Link to={"/StaffDetails"}>
             <button
-              className={`mt-5 px-2 py-1 rounded ${
+              className={`mt-5 px-3 w-full py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/StaffDetails"
-                  ? "border text-white border-white"
+                  ? "text-white bg-[#715AFF]"
                   : ""
               }`}
             >
@@ -140,9 +143,9 @@ function Navbar() {
           <div>
             <Link to={"/Appointment"}>
               <button
-                className={`mt-5 px-3 py-1 rounded ${
+                className={`mt-5 px-3 w-full py-1 rounded ${
                   fetchingCurrentLocation.pathname === "/Appointment"
-                    ? "border text-white border-white"
+                    ? "text-white bg-[#715AFF]"
                     : ""
                 }`}
               >
@@ -156,9 +159,9 @@ function Navbar() {
 
           <Link to={"/MedicalRecords"}>
             <button
-              className={`my-5 px-3 py-1 rounded ${
+              className={`my-5 px-3 w-full py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/MedicalRecords"
-                  ? "border text-white border-white"
+                  ? "text-white bg-[#715AFF]"
                   : ""
               }`}
             >
@@ -171,9 +174,9 @@ function Navbar() {
 
           <Link className="" to={"/Billing&Payment"}>
             <button
-              className={` px-2 py-1 rounded ${
+              className={` px-2 w-full py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/Billing&Payment"
-                  ? "border text-white border-white"
+                  ? "text-white bg-[#715AFF]"
                   : ""
               }`}
             >
@@ -183,6 +186,16 @@ function Navbar() {
               </div>
             </button>
           </Link>
+
+          <button
+            onClick={() => {
+              navigation("/");
+              localStorage.clear();
+            }}
+            className="flex mt-10 px-3 items-center"
+          >
+            <LuLogOut /> <p className="font-semibold ml-1">Logout</p>
+          </button>
         </div>
       </div>
     </div>

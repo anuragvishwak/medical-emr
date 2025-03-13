@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import { addDoc, collection } from "firebase/firestore";
 import { database } from "../FirebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
 
 function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
   const [selectedGender, setSelectedGender] = useState(null);
@@ -27,6 +28,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
         password
       );
       const user = userCredential.user;
+      console.log(user);
 
       const docRef = await addDoc(collection(database, "patient_details"), {
         name: name,
@@ -39,10 +41,9 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
         role: "patient",
       });
 
-      console.log("Document written with ID: ", docRef.id);
-      alert("Patient added successfully!");
       setOpeningPatientForm(false);
       gatheringPatientDetails();
+      toast.success("Patient added successfully!");
     } catch (e) {
       console.error("Error adding document: ", e);
       alert("Error adding patient: " + e.message);
@@ -51,9 +52,9 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
-      <div className="bg-white w-80 overflow-auto  my-5 sm:w-auto">
+      <div className="bg-white w-80 rounded overflow-auto  my-5 sm:w-auto">
         <div className="flex items-center p-5  justify-between">
-          <p className="font-bold text-[#34b1ff] text-3xl">Add Patient</p>
+          <p className="font-bold text-[#715AFF] text-3xl">Add Patient</p>
           <button
             onClick={() => setOpeningPatientForm(false)}
             className="text-red-500  font-bold"
@@ -62,12 +63,12 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
           </button>
         </div>
         <div className="px-5 pb-5">
-          <p className="font-semibold text-[#333333] text-xl mb-1">
+          <p className="font-semibold text-[#102E4A] text-xl mb-1">
             Basic Information
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div className="flex flex-col">
-              <label className="font-semibold text-[#34b1ff]">Name</label>
+              <label className="font-semibold text-[#715AFF]">Name</label>
               <input
                 onChange={(e) => setName(e.target.value)}
                 placeholder="John Doe"
@@ -75,7 +76,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
               ></input>
             </div>
             <div className="flex flex-col">
-              <label className="font-semibold text-[#34b1ff]">Age</label>
+              <label className="font-semibold text-[#715AFF]">Age</label>
               <input
                 onChange={(e) => setAge(e.target.value)}
                 placeholder="20"
@@ -83,7 +84,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
               ></input>
             </div>
             <div className="flex flex-col">
-              <label className="font-semibold text-[#34b1ff]">Gender</label>
+              <label className="font-semibold text-[#715AFF]">Gender</label>
               <select
                 className="border border-gray-300 rounded p-1.5"
                 value={selectedGender}
@@ -94,7 +95,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
               </select>
             </div>
             <div className="flex flex-col">
-              <label className="font-semibold text-[#34b1ff]">
+              <label className="font-semibold text-[#715AFF]">
                 Date of Birth
               </label>
               <DatePicker
@@ -114,7 +115,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="flex flex-col">
-                <label className="font-semibold text-[#34b1ff]">Phone</label>
+                <label className="font-semibold text-[#715AFF]">Phone</label>
                 <input
                   onChange={(e) => setphoneNo(e.target.value)}
                   placeholder="+91 9104031875"
@@ -122,7 +123,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
                 ></input>
               </div>{" "}
               <div className="flex flex-col">
-                <label className="font-semibold text-[#34b1ff]">Email</label>
+                <label className="font-semibold text-[#715AFF]">Email</label>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="johndoe@gmail.com"
@@ -130,7 +131,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
                 ></input>
               </div>
               <div className="flex flex-col">
-                <label className="font-semibold text-[#34b1ff]">Password</label>
+                <label className="font-semibold text-[#715AFF]">Password</label>
                 <input
                   onChange={(e) => setpassword(e.target.value)}
                   placeholder="anu2002"
@@ -140,7 +141,7 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
             </div>
 
             <div className="mt-4">
-              <label className="font-semibold text-[#34b1ff]">Address</label>
+              <label className="font-semibold text-[#715AFF]">Address</label>
               <textarea
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Zundal, Ahmedabad, India"
@@ -150,12 +151,12 @@ function AddPatientForm({ setOpeningPatientForm, gatheringPatientDetails }) {
             </div>
           </div>
 
-          <div className="flex items-center mt-5">
+          <div className="flex justify-end mt-5">
             <button
               onClick={() => {
                 handleSubmit();
               }}
-              className="w-full bg-[#34b1ff] text-white  p-2 rounded"
+              className="bg-[#102E4A] text-white font-bold px-10 py-2 rounded"
             >
               Add Patient
             </button>
