@@ -120,8 +120,8 @@ function AddStaff({ setopeningAddStaffForm }) {
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
-      <div className="bg-white p-5">
-        <div className="flex mb-5 text-[#333333] items-center justify-between">
+      <div className="bg-white w-80 sm:w-auto h-screen sm:h-auto overflow-auto my-8 sm:my-0 p-5">
+        <div className="flex mb-5 text-[#715AFF] items-center justify-between">
           <p className="font-bold text-3xl">Add Staff</p>
           <button
             onClick={() => setopeningAddStaffForm(false)}
@@ -132,11 +132,13 @@ function AddStaff({ setopeningAddStaffForm }) {
         </div>
 
         <div className="">
-          <div>
-            <p className="font-semibold text-xl">Personal Information</p>
-            <div className="grid grid-cols-3 gap-5">
+         
+         <div className="grid grid-cols-1 xl:grid-cols-2 mb-5 gap-5">
+         <div className="border border-gray-300 rounded p-3">
+            <p className="font-semibold text-[#102E4A] text-xl">Personal Information</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               <div className="flex flex-col">
-                <label className="text-blue-300 font-semibold">Name</label>
+                <label className="text-[#715AFF] font-semibold">Name</label>
                 <input
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
@@ -144,7 +146,7 @@ function AddStaff({ setopeningAddStaffForm }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-blue-300 font-semibold">Date of Birth</label>
+                <label className="text-[#715AFF] font-semibold">Date of Birth</label>
                 <input
                   type="date"
                   onChange={(e) => setDob(e.target.value)}
@@ -152,7 +154,7 @@ function AddStaff({ setopeningAddStaffForm }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-blue-300 font-semibold">Age</label>
+                <label className="text-[#715AFF] font-semibold">Age</label>
                 <input
                   type="number"
                   onChange={(e) => setAge(e.target.value)}
@@ -161,9 +163,9 @@ function AddStaff({ setopeningAddStaffForm }) {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-3 mt-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-2 gap-5">
               <div className="flex flex-col">
-                <label className="text-blue-300 font-semibold">Gender</label>
+                <label className="text-[#715AFF] font-semibold">Gender</label>
                 <select
                   className="border border-gray-300 rounded p-1"
                   value={selectedGender}
@@ -175,7 +177,7 @@ function AddStaff({ setopeningAddStaffForm }) {
                 </select>
               </div>
               <div className="flex flex-col">
-                <label className="text-blue-300 font-semibold">Phone</label>
+                <label className="text-[#715AFF] font-semibold">Phone</label>
                 <input
                   type="tel"
                   onChange={(e) => setPhoneNo(e.target.value)}
@@ -184,7 +186,7 @@ function AddStaff({ setopeningAddStaffForm }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-blue-300 font-semibold">Email</label>
+                <label className="text-[#715AFF] font-semibold">Email</label>
                 <input
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
@@ -195,13 +197,13 @@ function AddStaff({ setopeningAddStaffForm }) {
             </div>
           </div>
 
-          <div className='my-7'>
-            <p className="font-semibold text-xl mb-1">
+          <div className='rounded border border-gray-300 p-3'>
+            <p className="font-semibold text-[#102E4A] text-xl mb-1">
               Professional Information
             </p>
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               <div className="flex flex-col">
-                <label className="font-semibold">Role / Designation</label>
+                <label className="font-semibold text-[#715AFF]">Role / Designation</label>
                 <select
                   className="border border-gray-300 rounded p-1"
                   onChange={(e) => setSelectedRole(e.target.value)}
@@ -218,7 +220,7 @@ function AddStaff({ setopeningAddStaffForm }) {
 
               <div>
                 <div className="flex flex-col">
-                  <label className="font-semibold">Specialization</label>
+                  <label className="font-semibold text-[#715AFF]">Specialization</label>
                   <select
                     className="border border-gray-300 rounded p-1"
                     onChange={(e) => setSelectedSpecialization(e.target.value)}
@@ -235,7 +237,7 @@ function AddStaff({ setopeningAddStaffForm }) {
               </div>
 
               <div className="">
-                <p className="font-semibold">Department</p>
+                <p className="font-semibold text-[#715AFF]">Department</p>
                 <select
                   onChange={(e) => {
                     setdepartment(e.target.value);
@@ -249,9 +251,9 @@ function AddStaff({ setopeningAddStaffForm }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 mt-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 mt-2 gap-5">
               <div>
-                <p className="font-semibold">Year of Experience</p>
+                <p className="font-semibold text-[#715AFF]">Year of Experience</p>
                 <input
                   onChange={(e) => setyearOfExperience(e.target.value)}
                   placeholder="5 yrs"
@@ -259,7 +261,7 @@ function AddStaff({ setopeningAddStaffForm }) {
                 ></input>
               </div>
               <div>
-                <p className="font-semibold">Quanlification</p>
+                <p className="font-semibold text-[#715AFF]">Quanlification</p>
                 <select
                   className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={selectedQualification}
@@ -275,16 +277,17 @@ function AddStaff({ setopeningAddStaffForm }) {
               </div>
             </div>
           </div>
+         </div>
 
           <div>
-            <div>
-              <p className="font-semibold text-xl mb-1">
+            <div className="border border-gray-300 rounded p-3 mt-5">
+              <p className="font-semibold text-[#102E4A] text-xl mb-1">
                 Additional Information
               </p>
 
-              <div className="grid grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                 <div>
-                  <p className="font-semibold">Date of Joining</p>
+                  <p className="font-semibold text-[#715AFF]">Date of Joining</p>
                   <input
                     onChange={(e) => setdateOfJoining(e.target.value)}
                     placeholder="johndoe@gmail.com"
@@ -293,7 +296,7 @@ function AddStaff({ setopeningAddStaffForm }) {
                 </div>
 
                 <div>
-                  <p className="font-semibold">Shift Timing</p>
+                  <p className="font-semibold text-[#715AFF]">Shift Timing</p>
                   <select
                     onChange={(e) => {
                       const shift = e.target.value;
@@ -309,7 +312,7 @@ function AddStaff({ setopeningAddStaffForm }) {
                 </div>
 
                 <div>
-                  <p className="font-semibold">Work Status</p>
+                  <p className="font-semibold text-[#715AFF]">Work Status</p>
                   <select
                     onChange={(e) => {
                       const status = e.target.value;
@@ -324,9 +327,9 @@ function AddStaff({ setopeningAddStaffForm }) {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 mt-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 mt-2 gap-5">
                 <div>
-                  <p className="font-semibold">Salary Amount</p>
+                  <p className="font-semibold text-[#715AFF]">Salary Amount</p>
                   <input
                     onChange={(e) => setsalaryAmount(e.target.value)}
                     placeholder="30,0000/-"
@@ -335,7 +338,7 @@ function AddStaff({ setopeningAddStaffForm }) {
                 </div>
 
                 <div>
-                  <p className="font-semibold">Medical License Number</p>
+                  <p className="font-semibold text-[#715AFF]">Medical License Number</p>
                   <input
                     onChange={(e) => setmedicalLicenseNo(e.target.value)}
                     placeholder="DMC/R/12345"
@@ -350,7 +353,7 @@ function AddStaff({ setopeningAddStaffForm }) {
                 onClick={() => {
                   creatingStaff();
                 }}
-                className="text-white bg-[#333333] py-1 px-6 rounded"
+                className="text-white bg-[#102E4A] px-10 py-2 rounded"
               >
                 Create Staff
               </button>

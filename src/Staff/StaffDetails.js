@@ -37,9 +37,9 @@ function StaffDetails() {
 
   return (
     <div className="bg-[#eff7ff] sm:flex w-full min-h-screen h-full">
-      <div className="flex px-5 pt-5 sm:pt-0 sm:px-0 items-center">
+      <div className="flex bg-white border border-gray-300 sm:bg-none p-2 shadow sm:p-0 items-center">
         <Navbar />
-        <div className="flex items-center sm:hidden">
+        <div className="flex  items-center sm:hidden">
           <input
             placeholder="Search Staffs"
             className="border border-gray-300 rounded p-1 ml-2"

@@ -63,7 +63,7 @@ function Patient() {
 
   return (
     <div className="bg-[#eff7ff] sm:flex">
-      <div className="flex px-5 pt-5 sm:pt-0 sm:px-0 sm:block items-center">
+      <div className="flex p-3 sm:p-0 bg-white border-b border-gray-300 shadow sm:block items-center">
         <Navbar />
         <div className=" sm:hidden">
           <button
@@ -82,7 +82,7 @@ function Patient() {
             onClick={() => {
               setopeningNotification(!openingNotification);
             }}
-            className="bg-[#102E4A] text-white py-1 px-2 sm:px-4 rounded ml-3"
+            className="bg-[#102E4A] text-white py-1 px-2 sm:text-base text-sm sm:px-4 rounded ml-3"
           >
             <div className="flex items-center">
               <FaBell />

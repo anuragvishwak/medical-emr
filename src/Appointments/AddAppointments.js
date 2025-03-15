@@ -20,7 +20,7 @@ function AddAppointments({
   const [gatheringDoctors, setgatheringDoctors] = useState([]);
   const [selectedDoctor, setselctedDoctor] = useState("");
 
-  console.log(selectPatient, appointmentType);
+  const currentDate = new Date();
 
   async function gatheringPatientDetails() {
     const patientDetails = await getDocs(
@@ -53,6 +53,9 @@ function AddAppointments({
         fees: fees,
         additionalNote: additionalNote,
         doctor: selectedDoctor,
+        date: currentDate,
+        appointmentStatus: "pending",
+
       });
       setopeningAppointmentForm(false);
       toast.success("Appointment created.");
@@ -69,9 +72,9 @@ function AddAppointments({
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
-      <div className="bg-white rounded p-5">
+      <div className="bg-white h-screen sm:h-auto overflow-auto  w-80 sm:w-auto my-8  sm:my-0 rounded p-5">
         <div className="flex mb-5 items-center justify-between">
-          <p className="font-bold text-2xl">Add Appointment</p>
+          <p className="font-bold text-[#715AFF] text-2xl">Add Appointment</p>
           <button
             onClick={() => {
               setopeningAppointmentForm(false);
@@ -83,18 +86,18 @@ function AddAppointments({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div className="w-full">
-            <p>Appointment Date</p>
+          <div className="">
+            <p className="font-semibold text-[#715AFF]">Appointment Date</p>
             <DatePicker
               selected={startDate}
               onChange={(date) => setstartDate(date)}
               dateFormat="yyyy/MM/dd"
               placeholderText="Select a date"
-              className=" border border-gray-400 w-72 sm:w-auto rounded px-4 py-1"
+              className=" border border-gray-400 w-80 rounded p-1.5"
             />
           </div>
           <div className="">
-            <p>Appointment Type</p>
+            <p className="font-semibold text-[#715AFF]">Appointment Type</p>
             <select
               className="border w-full p-1.5 rounded border-gray-400"
               onChange={(e) => {
@@ -113,7 +116,7 @@ function AddAppointments({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 my-3 gap-5">
           <div>
-            <p>Patient</p>
+            <p className="font-semibold text-[#715AFF]">Patient</p>
             <select
               className="border w-full  p-1.5 rounded border-gray-400"
               onChange={(e) => {
@@ -131,7 +134,7 @@ function AddAppointments({
           </div>
 
           <div>
-            <p>Doctor</p>
+            <p className="font-semibold text-[#715AFF]">Doctor</p>
             <select
               onChange={(e) => {
                 setselctedDoctor(e.target.value);
@@ -148,26 +151,45 @@ function AddAppointments({
           </div>
         </div>
 
-        <div>
-          <p className="font-semibold text-lg text-[#333333]">Selcted Doctor</p>
+       <div className="grid grid-cols-1 mb-2 sm:grid-cols-2 gap-5">
+       <div className="border border-gray-300 p-3 rounded">
+          <p className="font-semibold text-lg mb-2 text-[#102E4A]">Selected Patient</p>
+          {patientDetails.filter((patient) => patient.name === selectPatient).map((patient) => (
+            <div>
+              <p className="font-semibold text-[#715AFF]">{patient.name}</p>
+            <div className="flex items-center">
+            <p className="text-sm text-[#102E4A]">{patient.email}</p>
+              <span className="text-[#102E4A] mx-1">|</span>
+              <p className="text-sm text-[#102E4A]">{patient.phoneNo}</p>
+              <span className="text-[#102E4A] mx-1">|</span>
+              <p className="text-sm text-[#102E4A]">{patient.gender}</p>
+            </div>
+            </div>
+          )
+        )}
+        </div>
+
+        <div className="border border-gray-300 p-3 rounded">
+          <p className="font-semibold text-lg mb-2 text-[#102E4A]">Selected Doctor</p>
           {gatheringDoctors
             .filter((doc) => doc.name === selectedDoctor)
             .map((doc) => (
-              <div>
-                <p className="text-[#333333] font-semibold">{doc.name}</p>
+              <div className="">
+                <p className="font-semibold text-[#715AFF]">{doc.name}</p>
                 <div className="flex items-center">
-                  <p className="text-sm text-gray-400">{doc.email}</p>
-                  <span className="text-gray-400 mx-1">|</span>
-                  <p className="text-sm text-gray-400">{doc.role}</p>
-                  <span className="text-gray-400 mx-1">|</span>
-                  <p className="text-sm text-gray-400">{doc.department}</p>
+                  <p className="text-sm text-[#102E4A]">{doc.email}</p>
+                  <span className="text-[#102E4A] mx-1">|</span>
+                  <p className="text-sm text-[#102E4A]">{doc.role}</p>
+                  <span className="text-[#102E4A] mx-1">|</span>
+                  <p className="text-sm text-[#102E4A]">{doc.department}</p>
                 </div>
               </div>
             ))}
         </div>
+       </div>
 
         <div className="mb-3">
-          <p className="">Doctor Fees</p>
+          <p className="font-semibold text-[#715AFF]">Doctor Fees</p>
           <input
             onChange={(e) => {
               setfees(e.target.value);
@@ -178,7 +200,7 @@ function AddAppointments({
         </div>
 
         <div>
-          <p>Additional Note</p>
+          <p className="font-semibold text-[#715AFF]">Additional Note</p>
           <textarea
             onChange={(e) => {
               setadditionalNote(e.target.value);

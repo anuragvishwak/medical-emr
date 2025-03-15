@@ -112,7 +112,7 @@ function Navbar() {
         <div className="px-4 my-10">
           <Link to={"/Patient"}>
             <button
-              className={`px-3 w-full py-1 rounded ${
+              className={`px-3 w-full  py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/Patient"
                   ? "text-white bg-[#715AFF]"
                   : ""
