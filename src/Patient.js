@@ -62,8 +62,8 @@ function Patient() {
   }, []);
 
   return (
-    <div className="bg-[#eff7ff] sm:flex">
-      <div className="flex p-3 sm:p-0 bg-white border-b border-gray-300 shadow sm:block items-center">
+    <div className="sm:flex">
+      <div className="flex p-3 sm:p-0 bg-white sm:block items-center">
         <Navbar />
         <div className=" sm:hidden">
           <button
@@ -94,7 +94,7 @@ function Patient() {
 
       <div className="h-screen overflow-auto w-full">
         <div className="hidden sm:block">
-          <div className="flex w-full p-3 bg-white shadow items-center justify-between">
+          <div className="flex w-full p-3 bg-white border-b items-center justify-between">
             <p className="text-xl text-[#715AFF] hidden sm:block sm:text-3xl font-semibold">
               Patient Details
             </p>
@@ -151,7 +151,7 @@ function Patient() {
             return (
               <div
                 key={patient.id}
-                className="bg-white border p-5 shadow"
+                className="bg-white border border-gray-400 p-5 rounded-lg"
               >
                 <div className="flex items-start  justify-between">
                   <div className="flex items-center">

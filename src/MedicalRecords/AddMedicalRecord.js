@@ -94,8 +94,8 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
               <button
                 className={`${
                   recordTabs === "medicine"
-                    ? "text-[#333333] border-b border-[#333333]"
-                    : "text-gray-400"
+                    ? "text-[#715AFF] border-b border-[#715AFF]"
+                    : "text-[#102E4A]"
                 }`}
                 onClick={() => {
                   setrecordTabs("medicine");
@@ -108,8 +108,8 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
               <button
                 className={`my-3 ${
                   recordTabs === "treatment"
-                    ? "text-[#333333] border-b border-[#333333]"
-                    : "text-gray-400"
+                    ? "text-[#715AFF] border-b border-[#715AFF]"
+                    : "text-[#102E4A]"
                 }`}
                 onClick={() => {
                   setrecordTabs("treatment");
@@ -122,8 +122,8 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
               <button
                 className={`${
                   recordTabs === "medical_record"
-                    ? "text-[#333333] border-b border-[#333333]"
-                    : "text-gray-400"
+                    ? "text-[#715AFF] border-b border-[#715AFF]"
+                    : "text-[#102E4A]"
                 }`}
                 onClick={() => {
                   setrecordTabs("medical_record");
@@ -139,8 +139,8 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
           <button
             className={`${
               recordTabs === "medicine"
-                ? "text-[#333333] border-b border-[#333333]"
-                : "text-gray-400"
+                ? "text-[#715AFF] border-b border-[#715AFF]"
+                : "text-[#102E4A]"
             }`}
             onClick={() => {
               setrecordTabs("medicine");
@@ -151,8 +151,8 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
           <button
             className={`${
               recordTabs === "treatment"
-                ? "text-[#333333] border-b border-[#333333]"
-                : "text-gray-400"
+                ? "text-[#715AFF] border-b border-[#715AFF]"
+                : "text-[#102E4A]"
             }`}
             onClick={() => {
               setrecordTabs("treatment");
@@ -163,8 +163,8 @@ function AddMedicalRecord({ setopeningMedicalRecord }) {
           <button
             className={`${
               recordTabs === "medical_record"
-                ? "text-[#333333] border-b border-[#333333]"
-                : "text-gray-400"
+                ? "text-[#715AFF] border-b border-[#715AFF]"
+                : "text-[#102E4A]"
             }`}
             onClick={() => {
               setrecordTabs("medical_record");

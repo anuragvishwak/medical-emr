@@ -108,11 +108,11 @@ function Navbar() {
         </div>
       )}
 
-      <div className="hidden sm:block border bg-[#102E4A] w-52 font-semibold text-white min-h-screen h-full">
-        <div className="px-4 my-10">
+      <div className="hidden sm:block border w-72 font-semibold text-[#102E4A] min-h-screen h-full">
+        <div className="px-2 my-10">
           <Link to={"/Patient"}>
             <button
-              className={`px-3 w-full  py-1 rounded ${
+              className={`px-1 w-full  py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/Patient"
                   ? "text-white bg-[#715AFF]"
                   : ""
@@ -127,7 +127,7 @@ function Navbar() {
 
           <Link to={"/StaffDetails"}>
             <button
-              className={`mt-5 px-3 w-full py-1 rounded ${
+              className={`px-1 px-1 mt-5 w-full py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/StaffDetails"
                   ? "text-white bg-[#715AFF]"
                   : ""
@@ -143,7 +143,7 @@ function Navbar() {
           <div>
             <Link to={"/Appointment"}>
               <button
-                className={`mt-5 px-3 w-full py-1 rounded ${
+                className={`mt-5 px-1 w-full py-1 rounded ${
                   fetchingCurrentLocation.pathname === "/Appointment"
                     ? "text-white bg-[#715AFF]"
                     : ""
@@ -157,9 +157,9 @@ function Navbar() {
             </Link>
           </div>
 
-          <Link to={"/MedicalRecords"}>
+          <Link to={"/ConsultationPrescriptionSection"}>
             <button
-              className={`my-5 px-3 w-full py-1 rounded ${
+              className={`my-5 w-full py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/MedicalRecords"
                   ? "text-white bg-[#715AFF]"
                   : ""
@@ -167,14 +167,14 @@ function Navbar() {
             >
               <div className="flex items-center">
                 <FaFileMedicalAlt className="mr-2" />
-                Medical Records
+                Consultation & Prescriptions
               </div>
             </button>
           </Link>
 
           <Link className="" to={"/Billing&Payment"}>
             <button
-              className={` px-2 w-full py-1 rounded ${
+              className={` w-full py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/Billing&Payment"
                   ? "text-white bg-[#715AFF]"
                   : ""
