@@ -13,6 +13,7 @@ import StaffDetails from "./Staff/StaffDetails";
 import SingleLandingPage from "./SingleLandingPage";
 import PatientDashboard from "./Patient Portal/PatientDashboard";
 import PatientAppointment from "./Patient Portal/PatientAppointment";
+import ConsultationPrescriptionSection from "./Consultation & Prescription/ConsultationPrescriptionSection";
 function App() {
   return (
     <div className="App">
@@ -26,6 +27,10 @@ function App() {
           <Route path="/StaffDetails" element={<StaffDetails />} />
           <Route path="/PatientDashboard" element={<PatientDashboard />} />
           <Route path="/PatientAppointment" element={<PatientAppointment />} />
+          <Route
+            path="ConsultationPrescriptionSection"
+            element={<ConsultationPrescriptionSection />}
+          />
         </Routes>
       </Router>
     </div>
