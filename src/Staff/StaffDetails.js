@@ -36,7 +36,7 @@ function StaffDetails() {
   }, []);
 
   return (
-    <div className="bg-[#eff7ff] sm:flex w-full min-h-screen h-full">
+    <div className="sm:flex w-full min-h-screen h-full">
       <div className="flex bg-white border border-gray-300 sm:bg-none p-2 shadow sm:p-0 items-center">
         <Navbar />
         <div className="flex  items-center sm:hidden">
@@ -56,7 +56,7 @@ function StaffDetails() {
         </div>
       </div>
       <div className="w-full ">
-        <div className="sm:flex hidden  bg-white shadow p-3 items-end  justify-between">
+        <div className="sm:flex hidden  bg-white border-b p-3 items-end  justify-between">
           <div>
             <p className="text-xl text-[#715AFF] hidden sm:block sm:text-3xl font-semibold">
               Staff Details
@@ -82,7 +82,7 @@ function StaffDetails() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-3 sm:p-4">
           {gatheringStaffDetails.map((staff) => (
-            <div key={staff.id} className="shadow-md border bg-white">
+            <div key={staff.id} className="border border-gray-300 bg-white">
               <div className="p-3">
                 <div className="">
                   <div className="flex items-center justify-between">

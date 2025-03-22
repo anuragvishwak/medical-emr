@@ -108,7 +108,7 @@ function Navbar() {
         </div>
       )}
 
-      <div className="hidden sm:block border w-72 font-semibold text-[#102E4A] min-h-screen h-full">
+      <div className="hidden sm:block border w-60 font-semibold text-[#102E4A] min-h-screen h-full">
         <div className="px-2 my-10">
           <Link to={"/Patient"}>
             <button
@@ -167,7 +167,7 @@ function Navbar() {
             >
               <div className="flex items-center">
                 <FaFileMedicalAlt className="mr-2" />
-                Consultation & Prescriptions
+                Consult & Prescribe
               </div>
             </button>
           </Link>
