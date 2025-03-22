@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { FaCalendarCheck, FaEye, FaPlus, FaRupeeSign } from "react-icons/fa";
 import Navbar from "../Navbar";
 import AddAppointments from "./AddAppointments";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { database } from "../FirebaseConfig";
 import AddAppointmentDetails from "./AddAppointmentDetails";
 import RenderingAppointmentDetails from "./RenderingAppointmentDetails";
+
+import { toast } from "react-toastify";
 
 function Appointment() {
   const [openingAppointmentForm, setopeningAppointmentForm] = useState(false);
@@ -15,6 +17,7 @@ function Appointment() {
   const [gatheringWholeDetails, setgatheringWholeDetails] = useState({});
   const [openingAdditionalDetails, setopeningAdditionalDetails] =
     useState(false);
+  const [currentStatus, setcurrentStatus] = useState("pending");
 
   const renderingItems = "Gathering some of the appointment details...";
   console.log(renderingItems);
@@ -29,6 +32,26 @@ function Appointment() {
     }));
     setappointmentDetails(multipleArray);
     console.log(multipleArray);
+  }
+
+  async function updatingAppointmentStatus(id, newStatus) {
+    try {
+      const appointmentRef = doc(database, "appointment_details", id);
+      await updateDoc(appointmentRef, { status: newStatus });
+
+      setappointmentDetails((prevAppointments) =>
+        prevAppointments.map((appointment) =>
+          appointment.id === id
+            ? { ...appointment, status: newStatus }
+            : appointment
+        )
+      );
+
+      toast.success("Appointment status updated successfully");
+    } catch (error) {
+      console.log(error);
+      toast.error("Somthing went wrong!!!");
+    }
   }
 
   useEffect(() => {
@@ -79,7 +102,7 @@ function Appointment() {
         <div className="grid p-5 grid-cols-1 sm:grid-cols-3 gap-5">
           {appointmentDetails.map((appointment) => (
             <div className="border border-gray-300 rounded-xl bg-white">
-              <div className="p-5">
+              <div className="p-4">
                 <div className="flex items-center  justify-between">
                   <p className="text-[#102E4A] font-semibold text-lg">
                     Appointment Details
@@ -95,9 +118,38 @@ function Appointment() {
                 </div>
                 <hr className="my-3" />
 
-                <p className="font-bold text-xl mb-2 text-[#715AFF]">
-                  {appointment.patient}
-                </p>
+                <div className="flex items-center justify-between">
+                  <p className="font-bold text-xl mb-2 text-[#715AFF]">
+                    {appointment.patient}
+                  </p>
+                  <select
+                    value={appointment.status}
+                    onChange={(e) =>
+                      updatingAppointmentStatus(appointment.id, e.target.value)
+                    }
+                    className={`border  font-semibold rounded p-1 w-32
+    ${appointment.status === "Pending" ? "border-gray-500 text-gray-500" : ""}
+    ${appointment.status === "Confirmed" ? "border-blue-500 text-blue-500" : ""}
+    ${
+      appointment.status === "Completed"
+        ? "border-green-500 text-green-500"
+        : ""
+    }
+    ${appointment.status === "Cancelled" ? "border-red-500 text-red-500" : ""}
+    ${
+      appointment.status === "Rescheduled"
+        ? "border-yellow-500 text-yellow-500"
+        : ""
+    }
+  `}
+                  >
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Rescheduled">Rescheduled</option>
+                  </select>
+                </div>
 
                 <div className="">
                   <div className="flex items-center">
@@ -129,18 +181,22 @@ function Appointment() {
               </div>
 
               <div className="flex mt-4 bg-[#102E4A] rounded-b-xl text-sm font-semibold items-center justify-end p-2">
-                <button className="bg-white rounded text-[#715AFF] px-2 py-1 shadow">
-                  <div
-                    onClick={() => {
-                      setopeningAdditionalDetails(true);
-                      setgatheringWholeDetails(appointment);
-                    }}
-                    className="flex items-center"
-                  >
-                    <FaEye className="mr-1" />
-                    View Details
-                  </div>
-                </button>
+                {appointment.status === "Completed" ? (
+                  <button className="bg-white rounded text-[#715AFF] px-2 py-1 shadow">
+                    <div
+                      onClick={() => {
+                        setopeningAdditionalDetails(true);
+                        setgatheringWholeDetails(appointment);
+                      }}
+                      className="flex items-center"
+                    >
+                      <FaEye className="mr-1" />
+                      View Details
+                    </div>
+                  </button>
+                ) : (
+                  ""
+                )}
                 <button
                   onClick={() => {
                     setopeningAdditionalDetailsForm(true);
@@ -163,7 +219,12 @@ function Appointment() {
         />
       )}
 
-      {openingAdditionalDetails && <RenderingAppointmentDetails gatheringWholeDetails = {gatheringWholeDetails} setopeningAdditionalDetails = {setopeningAdditionalDetails}/>}
+      {openingAdditionalDetails && (
+        <RenderingAppointmentDetails
+          gatheringWholeDetails={gatheringWholeDetails}
+          setopeningAdditionalDetails={setopeningAdditionalDetails}
+        />
+      )}
 
       {openingAdditionaDetailsForm && (
         <AddAppointmentDetails

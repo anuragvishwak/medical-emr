@@ -15,7 +15,7 @@ function AddAppointmentDetails({
   const [heartRate, setheartRate] = useState("");
   const [oxygenSaturation, setoxygenSaturation] = useState("");
 
-  const symptoms = [
+const symptoms = [
     {
       id: "fever",
       name: "Fever",
@@ -115,6 +115,7 @@ function AddAppointmentDetails({
       );
       await updateDoc(appointmentRef, {
         symptom: {
+          name: "Headache",
           description: "Severe headache and nausea",
           medication: ["Paracetamol", "Ibuprofen"],
           tests: ["Blood test", "MRI scan"],
@@ -135,9 +136,9 @@ function AddAppointmentDetails({
 
   return (
     <div className="bg-black z-50 flex flex-col justify-center items-center fixed inset-0 bg-opacity-70">
-      <div className="bg-white h-screen overflow-auto my-10 p-5 rounded">
+      <div className="bg-white w-[330px] sm:w-auto h-screen overflow-auto my-10 p-3 sm:p-5 rounded">
         <div className="flex  text-[#715AFF] items-center justify-between">
-          <p className="font-bold text-2xl"> Add Additonal Details</p>
+          <p className="font-bold text-xl sm:text-2xl"> Add Additonal Details</p>
           <button
             onClick={() => setopeningAdditionalDetailsForm(false)}
             className="text-red-500 font-bold"
@@ -147,7 +148,7 @@ function AddAppointmentDetails({
         </div>
 
         <div className="">
-          <div className="flex justify-between border-y py-1 my-3 items-center">
+          <div className="sm:flex justify-between border-y py-1 my-3 items-center">
             <div className="flex text-sm items-center">
               <p className="text-[#102E4A] font-semibold">Appointment ID:</p>
               <p className="ml-1 font-semibold text-[#715AFF]">
@@ -165,7 +166,7 @@ function AddAppointmentDetails({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div className="flex items-center text-[#102E4A]">
               <p className="text-[#102E4A]">Patient:</p>
               <p className="text-[#715AFF] ml-1">
@@ -202,14 +203,14 @@ function AddAppointmentDetails({
                 .filter((symptom) => symptom.id === selectedSymptom)
                 .map((symptom) => (
                   <div key={symptom.id}>
-                    <div className="flex my-2 items-center">
+                    <div className="sm:flex my-2 items-center">
                       <p className="font-semibold">Description:</p>
-                      <p className="ml-2">{symptom.description}</p>
+                      <p className="ml-2 w-auto">{symptom.description}</p>
                     </div>
 
                     <div className="">
                       <p className="font-semibold mr-2">Common Causes:</p>
-                      <div className="flex items-center space-x-2">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm sm:text-base">
                         {symptom.commonCauses.map((cause) => (
                           <>
                             <p className="px-3 border-gray-300 rounded-full border">
@@ -282,7 +283,7 @@ function AddAppointmentDetails({
 
         <div>
           <p className="text-[#102E4A] text-lg font-bold">Additional Details</p>
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5">
             <div>
               <p className="font-semibold text-[#715AFF]">Temperature:</p>
               <input
@@ -308,7 +309,7 @@ function AddAppointmentDetails({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-5">
             <div>
               <p className="font-semibold text-[#715AFF]">Heart Rate (BPM):</p>
               <input

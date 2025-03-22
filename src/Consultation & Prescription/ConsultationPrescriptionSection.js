@@ -12,8 +12,8 @@ function ConsultationPrescriptionSection() {
         <Navbar />
       </div>
       <div className="w-full">
-        <div className=" hidden sm:block p-3 w-full">
-          <div className="flex items-center justify-between">
+        <div className=" hidden sm:block  w-full">
+          <div className="flex border-b p-3 items-center justify-between">
             <div>
               <p className="text-xl text-[#715AFF] hidden sm:block sm:text-3xl font-semibold">
                 Consultation & Prescription
@@ -51,9 +51,13 @@ function ConsultationPrescriptionSection() {
             </div>
           </div>
 
-          <div className="py-3">
+          <div className="p-3">
             <FiltersSearchbars />
           </div>
+        </div>
+
+        <div>
+          <p></p>
         </div>
       </div>
     </div>
