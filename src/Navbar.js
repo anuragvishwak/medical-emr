@@ -127,7 +127,7 @@ function Navbar() {
 
           <Link to={"/StaffDetails"}>
             <button
-              className={`px-1 px-1 mt-5 w-full py-1 rounded ${
+              className={`px-1 mt-5 w-full py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/StaffDetails"
                   ? "text-white bg-[#715AFF]"
                   : ""
