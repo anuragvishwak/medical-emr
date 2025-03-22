@@ -20,13 +20,13 @@ function Navbar() {
     <div>
       <button
         onClick={() => setopeningNavbar(!openingNavbar)}
-        className="border-2 text-[#34b1ff] border-[#34b1ff] sm:hidden rounded p-1"
+        className="border-2 text-[#715AFF] border-[#715AFF] sm:hidden rounded p-1"
       >
         <FaBars size={20} />
       </button>
 
       {openingNavbar && (
-        <div className="absolute top-14 shadow-xl z-50 border bg-[#34b1ff] font-semibold text-white">
+        <div className="absolute top-14 shadow-xl z-50 border bg-white font-semibold text-[#102E4A]">
           <div className="px-4 flex flex-col my-10">
             <Link to={"/Patient"}>
               <button
@@ -75,20 +75,20 @@ function Navbar() {
               </Link>
             </div>
 
-            <Link to={"/MedicalRecords"}>
-              <button
-                className={`my-5 px-3 py-1 rounded ${
-                  fetchingCurrentLocation.pathname === "/MedicalRecords"
-                    ? "text-white bg-[#715AFF]"
-                    : ""
-                }`}
-              >
-                <div className="flex items-center">
-                  <FaFileMedicalAlt className="mr-2" />
-                  Medical Records
-                </div>
-              </button>
-            </Link>
+            <Link to={"/ConsultationPrescriptionSection"}>
+            <button
+              className={`my-5 w-full py-1 rounded ${
+                fetchingCurrentLocation.pathname === "/MedicalRecords"
+                  ? "text-white bg-[#715AFF]"
+                  : ""
+              }`}
+            >
+              <div className="flex items-center">
+                <FaFileMedicalAlt className="mr-2" />
+                Consult & Prescribe
+              </div>
+            </button>
+          </Link>
 
             <Link className="" to={"/Billing&Payment"}>
               <button
@@ -127,7 +127,7 @@ function Navbar() {
 
           <Link to={"/StaffDetails"}>
             <button
-              className={`px-1 px-1 mt-5 w-full py-1 rounded ${
+              className={`px-1 mt-5 w-full py-1 rounded ${
                 fetchingCurrentLocation.pathname === "/StaffDetails"
                   ? "text-white bg-[#715AFF]"
                   : ""
