@@ -75,20 +75,20 @@ function Navbar() {
               </Link>
             </div>
 
-            <Link to={"/MedicalRecords"}>
-              <button
-                className={`my-5 px-3 py-1 rounded ${
-                  fetchingCurrentLocation.pathname === "/MedicalRecords"
-                    ? "text-white bg-[#715AFF]"
-                    : ""
-                }`}
-              >
-                <div className="flex items-center">
-                  <FaFileMedicalAlt className="mr-2" />
-                  Medical Records
-                </div>
-              </button>
-            </Link>
+            <Link to={"/ConsultationPrescriptionSection"}>
+            <button
+              className={`my-5 w-full py-1 rounded ${
+                fetchingCurrentLocation.pathname === "/MedicalRecords"
+                  ? "text-white bg-[#715AFF]"
+                  : ""
+              }`}
+            >
+              <div className="flex items-center">
+                <FaFileMedicalAlt className="mr-2" />
+                Consult & Prescribe
+              </div>
+            </button>
+          </Link>
 
             <Link className="" to={"/Billing&Payment"}>
               <button
